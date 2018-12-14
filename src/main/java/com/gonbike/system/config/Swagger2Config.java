@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * ${DESCRIPTION}
  *
  * @author edison
- * @create 2017-01-02 23:53
+ * @create 2018-01-02 23:53
  */
 @EnableSwagger2
 @Configuration

@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 字典表
  * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-10-03 15:45:42
+ * @author Shuaige
+ * @email 77509028@qq.com
+ * @date 2018-10-03 15:45:42
  */
 @Mapper
 public interface DictDao {

@@ -8,8 +8,8 @@ import java.util.Map;
 /**
  * 
  * 
- * @author chglee
- * @email 1992lcg@163.com
+ * @author Shuaige
+ * @email 77509028@qq.com
  * @date 2018-12-14 17:02:21
  */
 public interface LabelService {

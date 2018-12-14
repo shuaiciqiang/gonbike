@@ -9,9 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 菜单管理
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-10-03 09:45:09
+ * @author Shuaige
+ * @email 77509028@qq.com
+ * @date 2018-10-03 09:45:09
  */
 @Mapper
 public interface MenuDao {

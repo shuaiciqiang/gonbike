@@ -18,9 +18,9 @@ import java.util.Map;
 
 /**
  * 字典表
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-09-29 18:28:07
+ * @author Shuaige
+ * @email 77509028@qq.com
+ * @date 2018-09-29 18:28:07
  */
 
 @Controller

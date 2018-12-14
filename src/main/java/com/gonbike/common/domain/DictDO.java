@@ -9,9 +9,9 @@ import java.util.Date;
 /**
  * 字典表
  * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-09-29 18:28:07
+ * @author Shuaige
+ * @email 77509028@qq.com
+ * @date 2018-09-29 18:28:07
  */
 public class DictDO implements Serializable {
 	private static final long serialVersionUID = 1L;

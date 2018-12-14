@@ -8,9 +8,9 @@ import java.util.Map;
 /**
  * 通知通告发送记录
  * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-10-09 17:18:45
+ * @author Shuaige
+ * @email 77509028@qq.com
+ * @date 2018-10-09 17:18:45
  */
 public interface NotifyRecordService {
 	

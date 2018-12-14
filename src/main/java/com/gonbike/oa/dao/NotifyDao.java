@@ -11,9 +11,9 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 通知通告
  * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-10-05 17:11:16
+ * @author Shuaige
+ * @email 77509028@qq.com
+ * @date 2018-10-05 17:11:16
  */
 @Mapper
 public interface NotifyDao {

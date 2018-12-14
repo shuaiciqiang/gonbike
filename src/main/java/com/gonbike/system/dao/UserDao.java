@@ -9,9 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-10-03 09:45:11
+ * @author Shuaige
+ * @email 77509028@qq.com
+ * @date 2018-10-03 09:45:11
  */
 @Mapper
 public interface UserDao {

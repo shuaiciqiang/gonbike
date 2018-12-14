@@ -49,7 +49,7 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '商品id，同时也是商品编号' 
+									title : '商品id'
 								},
 																{
 									field : 'title', 
@@ -81,7 +81,11 @@ function load() {
 								},
 																{
 									field : 'image', 
-									title : '商品图片主图' 
+									title : '商品图片主图',
+                                    formatter : function(value, row, index) {
+										var img ="<img height='60px;' width='60px' src='"+row.image+"' />";
+                                        return img;
+                                    }
 								},
 																{
 									field : 'cid', 
@@ -93,11 +97,16 @@ function load() {
 								},
 																{
 									field : 'status', 
-									title : '商品状态，1-正常，2-下架，3-删除' 
-								},
-																{
-									field : 'createUserId', 
-									title : '创建人ID' 
+									title : '商品状态',
+									formatter : function(value, row, index) {
+                                        if (row.status*1==1){
+                                        	return "正常";
+										}else if (row.status*1==2){
+                                            return "下架";
+                                        }else {
+                                            return "删除";
+                                        }
+                                    }
 								},
 																{
 									field : 'createUser', 
@@ -108,10 +117,6 @@ function load() {
 									title : '创建时间' 
 								},
 																{
-									field : 'modifyUserId', 
-									title : '修改人ID' 
-								},
-																{
 									field : 'modifyUser', 
 									title : '修改人' 
 								},
@@ -120,8 +125,8 @@ function load() {
 									title : '更新时间' 
 								},
 																{
-									field : 'textByte', 
-									title : '已字节的形式保存富文本内容' 
+									field : 'textByteStr',
+									title : '富文本内容'
 								},
 																{
 									title : '操作',

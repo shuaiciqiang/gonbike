@@ -3,7 +3,7 @@ package com.gonbike.system.domain;
 import java.io.Serializable;
 
 /**
- * @author bootdo 1992lcg@163.com
+ * @author bootdo 77509028@qq.com
  * @version V1.0
  */
 public class UserToken implements Serializable {
