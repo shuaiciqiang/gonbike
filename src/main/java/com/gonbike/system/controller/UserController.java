@@ -83,7 +83,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	R save(UserDO user) {
 
-		user.setPassword(MD5Utils.encrypt(user.getUserName(), user.getPassword()));
+		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		//只是后台用户添加，不支持前台商城用户添加
 		//user.setFromType(1);
 		if (userService.save(user) > 0) {

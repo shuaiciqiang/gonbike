@@ -4,13 +4,15 @@
 <mapper namespace="com.gonbike.system.dao.UserDao">
 
 	<select id="get" resultType="com.gonbike.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,`fromType` from sys_user where user_id = #{value}
+		select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype  from sys_user where user_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.gonbike.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user
-        <where>  
-		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype   from sys_user
+        <where>
+			<if test="fromType != null and fromType != ''"> and fromType = #{fromType} </if>
+
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
 		  		  <if test="password != null and password != ''"> and password = #{password} </if>
@@ -42,11 +44,49 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
+	<select id="listByUser" resultType="com.gonbike.system.domain.UserDO" parameterType="com.gonbike.system.domain.UserDO" >
+		select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype   from sys_user
+		<where>
+			<if test="fromType != null and fromType != ''"> and fromType = #{fromType} </if>
+
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="password != null and password != ''"> and password = #{password} </if>
+			<if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
+			<if test="email != null and email != ''"> and email = #{email} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="status != null and status != ''"> and status = #{status} </if>
+			<if test="userIdCreate != null and userIdCreate != ''"> and user_id_create = #{userIdCreate} </if>
+			<if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+			<if test="gmtModified != null and gmtModified != ''"> and gmt_modified = #{gmtModified} </if>
+			<if test="sex != null and sex != ''"> and sex = #{sex} </if>
+			<if test="birth != null and birth != ''"> and birth = #{birth} </if>
+			<if test="picId != null and picId != ''"> and pic_id = #{picId} </if>
+			<if test="liveAddress != null and liveAddress != ''"> and live_address = #{liveAddress} </if>
+			<if test="hobby != null and hobby != ''"> and hobby = #{hobby} </if>
+			<if test="province != null and province != ''"> and province = #{province} </if>
+			<if test="city != null and city != ''"> and city = #{city} </if>
+			<if test="district != null and district != ''"> and district = #{district} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by user_id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
  	<select id="count" resultType="int">
-		select count(*) from sys_user
-		 <where>  
-		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+		select count(1) from sys_user
+		 <where>
+			 <if test="fromType != null and fromType != ''"> and fromType = #{fromType} </if>
+
+			 <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
 		  		  <if test="password != null and password != ''"> and password = #{password} </if>
@@ -67,7 +107,32 @@
 		  		  <if test="district != null and district != ''"> and district = #{district} </if>
 		  		</where>
 	</select>
-	 
+	<select id="countByUser" resultType="int"  parameterType="com.gonbike.system.domain.UserDO">
+		select count(1) from sys_user
+		<where>
+			<if test="fromType != null and fromType != ''"> and fromType = #{fromType} </if>
+
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="username != null and username != ''"> and username = #{username} </if>
+			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="password != null and password != ''"> and password = #{password} </if>
+			<if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
+			<if test="email != null and email != ''"> and email = #{email} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="status != null and status != ''"> and status = #{status} </if>
+			<if test="userIdCreate != null and userIdCreate != ''"> and user_id_create = #{userIdCreate} </if>
+			<if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+			<if test="gmtModified != null and gmtModified != ''"> and gmt_modified = #{gmtModified} </if>
+			<if test="sex != null and sex != ''"> and sex = #{sex} </if>
+			<if test="birth != null and birth != ''"> and birth = #{birth} </if>
+			<if test="picId != null and picId != ''"> and pic_id = #{picId} </if>
+			<if test="liveAddress != null and liveAddress != ''"> and live_address = #{liveAddress} </if>
+			<if test="hobby != null and hobby != ''"> and hobby = #{hobby} </if>
+			<if test="province != null and province != ''"> and province = #{province} </if>
+			<if test="city != null and city != ''"> and city = #{city} </if>
+			<if test="district != null and district != ''"> and district = #{district} </if>
+		</where>
+	</select>
 	<insert id="save" parameterType="com.gonbike.system.domain.UserDO" useGeneratedKeys="true" keyProperty="userId">
 		insert into sys_user
 		(
@@ -82,7 +147,8 @@
 			`gmt_create`, 
 			`gmt_modified`, 
 			`sex`, 
-			`birth`, 
+			`birth`,
+			fromType,
 			`pic_id`, 
 			`live_address`, 
 			`hobby`, 
@@ -92,7 +158,7 @@
 		)
 		values
 		(
-			#{username}, 
+			#{username},
 			#{name}, 
 			#{password}, 
 			#{deptId}, 
@@ -102,8 +168,9 @@
 			#{userIdCreate}, 
 			#{gmtCreate}, 
 			#{gmtModified}, 
-			#{sex}, 
-			#{birth}, 
+			#{sex},
+			#{birth},
+			#{fromType},
 			#{picId}, 
 			#{liveAddress}, 
 			#{hobby}, 

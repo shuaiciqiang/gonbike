@@ -11,7 +11,7 @@ public class UserDO implements Serializable {
     //
     private Long userId;
     // 用户名
-    private String userName;
+    private String username;
     // 用户真实姓名
     private String name;
     // 密码
@@ -50,6 +50,25 @@ public class UserDO implements Serializable {
     private String city;
     //所在地区
     private String district;
+    private Integer limit;
+    private Integer offset;
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
     /**
      * 0是前台商城用户，1是后台管理员账户
      */
@@ -75,12 +94,12 @@ public class UserDO implements Serializable {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsername(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
@@ -239,7 +258,7 @@ public class UserDO implements Serializable {
     public String toString() {
         return "UserDO{" +
                 "userId=" + userId +
-                ", username='" + userName + '\'' +
+                ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", deptId=" + deptId +

@@ -77,7 +77,7 @@ public class LabelController extends BaseController {
 	@RequiresPermissions("system:label:add")
 	public R save( LabelDO label){
 		label.setCreateUserId(getUser().getUserId());
-		label.setCreateUser(getUser().getUserName());
+		label.setCreateUser(getUser().getUsername());
 		label.setCreateDate(DateUtils.getDateTime());
 		if(labelService.save(label)>0){
 			return R.ok();
@@ -92,7 +92,7 @@ public class LabelController extends BaseController {
 	@RequiresPermissions("system:label:edit")
 	public R update( LabelDO label){
 		label.setModifyUserId(getUser().getUserId());
-		label.setModifyUser(getUser().getUserName());
+		label.setModifyUser(getUser().getUsername());
 		label.setModifyDate(DateUtils.getDateTime());
 		labelService.update(label);
 		return R.ok();

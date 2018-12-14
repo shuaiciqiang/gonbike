@@ -60,12 +60,18 @@ public class UserServiceImpl implements UserService {
     public List<UserDO> list(Map<String, Object> map) {
         return userMapper.list(map);
     }
-
+    @Override
+    public List<UserDO> listByUser(UserDO user) {
+        return userMapper.listByUser(user);
+    }
     @Override
     public int count(Map<String, Object> map) {
         return userMapper.count(map);
     }
-
+    @Override
+    public int countByUser(UserDO user) {
+        return userMapper.countByUser(user);
+    }
     @Transactional
     @Override
     public int save(UserDO user) {
@@ -127,8 +133,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public int resetPwd(UserVO userVO, UserDO userDO) throws Exception {
         if (Objects.equals(userVO.getUserDO().getUserId(), userDO.getUserId())) {
-            if (Objects.equals(MD5Utils.encrypt(userDO.getUserName(), userVO.getPwdOld()), userDO.getPassword())) {
-                userDO.setPassword(MD5Utils.encrypt(userDO.getUserName(), userVO.getPwdNew()));
+            if (Objects.equals(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdOld()), userDO.getPassword())) {
+                userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
                 return userMapper.update(userDO);
             } else {
                 throw new Exception("输入的旧密码有误！");
@@ -141,10 +147,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int adminResetPwd(UserVO userVO) throws Exception {
         UserDO userDO = get(userVO.getUserDO().getUserId());
-        if ("admin".equals(userDO.getUserName())) {
+        if ("admin".equals(userDO.getUsername())) {
             throw new Exception("超级管理员的账号不允许直接重置！");
         }
-        userDO.setPassword(MD5Utils.encrypt(userDO.getUserName(), userVO.getPwdNew()));
+        userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
         return userMapper.update(userDO);
 
 

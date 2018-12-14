@@ -75,7 +75,7 @@ public class BDExceptionHandler {
         UserDO current = ShiroUtils.getUser();
         if(null!=current){
             logDO.setUserId(current.getUserId());
-            logDO.setUsername(current.getUserName());
+            logDO.setUsername(current.getUsername());
         }
         logService.save(logDO);
         logger.error(e.getMessage(), e);

@@ -17,9 +17,9 @@ public interface UserService {
 	UserDO get(Long id);
 
 	List<UserDO> list(Map<String, Object> map);
-
+	List<UserDO> listByUser(UserDO user);
 	int count(Map<String, Object> map);
-
+	int countByUser(UserDO user);
 	int save(UserDO user);
 
 	int update(UserDO user);

@@ -42,7 +42,7 @@ public class SessionServiceImpl implements SessionService {
                 SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
                         .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
                 UserDO userDO = (UserDO) principalCollection.getPrimaryPrincipal();
-                userOnline.setUsername(userDO.getUserName());
+                userOnline.setUsername(userDO.getUsername());
             }
             userOnline.setId((String) session.getId());
             userOnline.setHost(session.getHost());
