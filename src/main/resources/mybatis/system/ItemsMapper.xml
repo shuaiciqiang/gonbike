@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gonbike.system.dao.ItemsDao">
+
+	<select id="get" resultType="com.gonbike.system.domain.ItemsDO">
+		select `id` as id ,`title` as title ,`sup_Id` as supId ,`sup_Name` as supName ,`sell_Point` as sellPoint ,`price` as price ,`num` as num ,`limit_Num` as limitNum ,`image` as image ,`cid` as cid ,`ver_Id` as verId ,`status` as status ,`create_User_Id` as createUserId ,`create_User` as createUser ,`create_Time` as createTime ,`modify_User_Id` as modifyUserId ,`modify_User` as modifyUser ,`modify_Time` as modifyTime ,`text_Byte` as textByte  from shop_items where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.gonbike.system.domain.ItemsDO">
+		select `id`,`title`,`sup_Id`,`sup_Name`,`sell_Point`,`price`,`num`,`limit_Num`,`image`,`cid`,`ver_Id`,`status`,`create_User_Id`,`create_User`,`create_Time`,`modify_User_Id`,`modify_User`,`modify_Time`,`text_Byte` from shop_items
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="supId != null and supId != ''"> and sup_Id = #{supId} </if>
+		  		  <if test="supName != null and supName != ''"> and sup_Name = #{supName} </if>
+		  		  <if test="sellPoint != null and sellPoint != ''"> and sell_Point = #{sellPoint} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
+		  		  <if test="limitNum != null and limitNum != ''"> and limit_Num = #{limitNum} </if>
+		  		  <if test="image != null and image != ''"> and image = #{image} </if>
+		  		  <if test="cid != null and cid != ''"> and cid = #{cid} </if>
+		  		  <if test="verId != null and verId != ''"> and ver_Id = #{verId} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createUserId != null and createUserId != ''"> and create_User_Id = #{createUserId} </if>
+		  		  <if test="createUser != null and createUser != ''"> and create_User = #{createUser} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_Time = #{createTime} </if>
+		  		  <if test="modifyUserId != null and modifyUserId != ''"> and modify_User_Id = #{modifyUserId} </if>
+		  		  <if test="modifyUser != null and modifyUser != ''"> and modify_User = #{modifyUser} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_Time = #{modifyTime} </if>
+		  		  <if test="textByte != null and textByte != ''"> and text_Byte = #{textByte} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from shop_items
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="supId != null and supId != ''"> and sup_Id = #{supId} </if>
+		  		  <if test="supName != null and supName != ''"> and sup_Name = #{supName} </if>
+		  		  <if test="sellPoint != null and sellPoint != ''"> and sell_Point = #{sellPoint} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
+		  		  <if test="num != null and num != ''"> and num = #{num} </if>
+		  		  <if test="limitNum != null and limitNum != ''"> and limit_Num = #{limitNum} </if>
+		  		  <if test="image != null and image != ''"> and image = #{image} </if>
+		  		  <if test="cid != null and cid != ''"> and cid = #{cid} </if>
+		  		  <if test="verId != null and verId != ''"> and ver_Id = #{verId} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createUserId != null and createUserId != ''"> and create_User_Id = #{createUserId} </if>
+		  		  <if test="createUser != null and createUser != ''"> and create_User = #{createUser} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_Time = #{createTime} </if>
+		  		  <if test="modifyUserId != null and modifyUserId != ''"> and modify_User_Id = #{modifyUserId} </if>
+		  		  <if test="modifyUser != null and modifyUser != ''"> and modify_User = #{modifyUser} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_Time = #{modifyTime} </if>
+		  		  <if test="textByte != null and textByte != ''"> and text_Byte = #{textByte} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.gonbike.system.domain.ItemsDO" useGeneratedKeys="true" keyProperty="id">
+		insert into shop_items
+		(
+			`title`, 
+			`sup_Id`, 
+			`sup_Name`, 
+			`sell_Point`, 
+			`price`, 
+			`num`, 
+			`limit_Num`, 
+			`image`, 
+			`cid`, 
+			`ver_Id`, 
+			`status`, 
+			`create_User_Id`, 
+			`create_User`, 
+			`create_Time`, 
+			`modify_User_Id`, 
+			`modify_User`, 
+			`modify_Time`, 
+			`text_Byte`
+		)
+		values
+		(
+			#{title}, 
+			#{supId}, 
+			#{supName}, 
+			#{sellPoint}, 
+			#{price}, 
+			#{num}, 
+			#{limitNum}, 
+			#{image}, 
+			#{cid}, 
+			#{verId}, 
+			#{status}, 
+			#{createUserId}, 
+			#{createUser}, 
+			#{createTime}, 
+			#{modifyUserId}, 
+			#{modifyUser}, 
+			#{modifyTime}, 
+			#{textByte}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.gonbike.system.domain.ItemsDO">
+		update shop_items 
+		<set>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="supId != null">`sup_Id` = #{supId}, </if>
+			<if test="supName != null">`sup_Name` = #{supName}, </if>
+			<if test="sellPoint != null">`sell_Point` = #{sellPoint}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="num != null">`num` = #{num}, </if>
+			<if test="limitNum != null">`limit_Num` = #{limitNum}, </if>
+			<if test="image != null">`image` = #{image}, </if>
+			<if test="cid != null">`cid` = #{cid}, </if>
+			<if test="verId != null">`ver_Id` = #{verId}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createUserId != null">`create_User_Id` = #{createUserId}, </if>
+			<if test="createUser != null">`create_User` = #{createUser}, </if>
+			<if test="createTime != null">`create_Time` = #{createTime}, </if>
+			<if test="modifyUserId != null">`modify_User_Id` = #{modifyUserId}, </if>
+			<if test="modifyUser != null">`modify_User` = #{modifyUser}, </if>
+			<if test="modifyTime != null">`modify_Time` = #{modifyTime}, </if>
+			<if test="textByte != null">`text_Byte` = #{textByte}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from shop_items where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from shop_items where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

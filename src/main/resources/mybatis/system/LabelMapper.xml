@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gonbike.system.dao.LabelDao">
+
+	<select id="get" resultType="com.gonbike.system.domain.LabelDO">
+		select `id`,`labelCode`,`labelName`,`indexQuery`,`createUserId`,`createUser`,`createDate`,`modifyUserId`,`modifyUser`,`modifyDate` from shop_labels where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.gonbike.system.domain.LabelDO">
+		select `id`,`labelCode`,`labelName`,`indexQuery`,`createUserId`,`createUser`,`createDate`,`modifyUserId`,`modifyUser`,`modifyDate` from shop_labels
+        <where>  
+		  		  <if test="labelCode != null and labelCode != ''"> and labelCode = #{labelcode} </if>
+		  		  <if test="labelName != null and labelName != ''"> and labelName = #{labelname} </if>
+		  		  <if test="indexQuery != null and indexQuery != ''"> and indexQuery = #{indexquery} </if>
+		  		  <if test="createUserId != null and createUserId != ''"> and createUserId = #{createuserid} </if>
+		  		  <if test="createUser != null and createUser != ''"> and createUser = #{createuser} </if>
+		  		  <if test="createDate != null and createDate != ''"> and createDate = #{createdate} </if>
+		  		  <if test="modifyUserId != null and modifyUserId != ''"> and modifyUserId = #{modifyuserid} </if>
+		  		  <if test="modifyUser != null and modifyUser != ''"> and modifyUser = #{modifyuser} </if>
+		  		  <if test="modifyDate != null and modifyDate != ''"> and modifyDate = #{modifydate} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(1) from shop_labels
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="labelCode != null and labelCode != ''"> and labelCode = #{labelcode} </if>
+		  		  <if test="labelname != null and labelname != ''"> and labelName = #{labelname} </if>
+		  		  <if test="indexquery != null and indexquery != ''"> and indexQuery = #{indexquery} </if>
+		  		  <if test="createuserid != null and createuserid != ''"> and createUserId = #{createuserid} </if>
+		  		  <if test="createuser != null and createuser != ''"> and createUser = #{createuser} </if>
+		  		  <if test="createdate != null and createdate != ''"> and createDate = #{createdate} </if>
+		  		  <if test="modifyuserid != null and modifyuserid != ''"> and modifyUserId = #{modifyuserid} </if>
+		  		  <if test="modifyuser != null and modifyuser != ''"> and modifyUser = #{modifyuser} </if>
+		  		  <if test="modifydate != null and modifydate != ''"> and modifyDate = #{modifydate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.gonbike.system.domain.LabelDO" useGeneratedKeys="true" keyProperty="id">
+		insert into shop_labels
+		(
+			`labelCode`, 
+			`labelName`, 
+			`indexQuery`, 
+			`createUserId`, 
+			`createUser`, 
+			`createDate`, 
+			`modifyUserId`, 
+			`modifyUser`, 
+			`modifyDate`
+		)
+		values
+		(
+			#{labelCode}, 
+			#{labelName}, 
+			#{indexQuery}, 
+			#{createUserId}, 
+			#{createUser}, 
+			#{createDate}, 
+			#{modifyUserId}, 
+			#{modifyUser}, 
+			#{modifyDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.gonbike.system.domain.LabelDO">
+		update shop_labels 
+		<set>
+			<if test="labelCode != null">`labelCode` = #{labelCode}, </if>
+			<if test="labelName != null">`labelName` = #{labelName}, </if>
+			<if test="indexQuery != null">`indexQuery` = #{indexQuery}, </if>
+			<if test="createUserId != null">`createUserId` = #{createUserId}, </if>
+			<if test="createUser != null">`createUser` = #{createUser}, </if>
+			<if test="modifyUserId != null">`modifyUserId` = #{modifyUserId}, </if>
+			<if test="modifyUser != null">`modifyUser` = #{modifyUser}, </if>
+			<if test="modifyDate != null">`modifyDate` = #{modifyDate}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from shop_labels where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from shop_labels where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

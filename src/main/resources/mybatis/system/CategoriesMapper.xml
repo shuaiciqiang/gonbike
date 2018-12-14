@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gonbike.system.dao.CategoriesDao">
+
+	<select id="get" resultType="com.gonbike.system.domain.CategoriesDO">
+		select `id` as id ,`name` as name ,`keywords` as keywords ,`front_Desc` as frontDesc ,`parent_Id` as parentId ,`sort_Order` as sortOrder ,`show_Index` as showIndex ,`is_Show` as isShow ,`banner_Url` as bannerUrl ,`icon_Url` as iconUrl ,`image_Url` as imageUrl ,`wap_Banner_Url` as wapBannerUrl ,`level` as level ,`type` as type ,`front_Name` as frontName  from shop_categories where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.gonbike.system.domain.CategoriesDO">
+		select `id` as id ,`name` as name ,`keywords` as keywords ,`front_Desc` as frontDesc ,`parent_Id` as parentId ,`sort_Order` as sortOrder ,`show_Index` as showIndex ,`is_Show` as isShow ,`banner_Url` as bannerUrl ,`icon_Url` as iconUrl ,`image_Url` as imageUrl ,`wap_Banner_Url` as wapBannerUrl ,`level` as level ,`type` as type ,`front_Name` as frontName from shop_categories
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="keywords != null and keywords != ''"> and keywords = #{keywords} </if>
+		  		  <if test="frontDesc != null and frontDesc != ''"> and front_Desc = #{frontDesc} </if>
+		  		  <if test="parentId != null and parentId != ''"> and parent_Id = #{parentId} </if>
+		  		  <if test="sortOrder != null and sortOrder != ''"> and sort_Order = #{sortOrder} </if>
+		  		  <if test="showIndex != null and showIndex != ''"> and show_Index = #{showIndex} </if>
+		  		  <if test="isShow != null and isShow != ''"> and is_Show = #{isShow} </if>
+		  		  <if test="bannerUrl != null and bannerUrl != ''"> and banner_Url = #{bannerUrl} </if>
+		  		  <if test="iconUrl != null and iconUrl != ''"> and icon_Url = #{iconUrl} </if>
+		  		  <if test="imageUrl != null and imageUrl != ''"> and image_Url = #{imageUrl} </if>
+		  		  <if test="wapBannerUrl != null and wapBannerUrl != ''"> and wap_Banner_Url = #{wapBannerUrl} </if>
+		  		  <if test="level != null and level != ''"> and level = #{level} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="frontName != null and frontName != ''"> and front_Name = #{frontName} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from shop_categories
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="keywords != null and keywords != ''"> and keywords = #{keywords} </if>
+		  		  <if test="frontDesc != null and frontDesc != ''"> and front_Desc = #{frontDesc} </if>
+		  		  <if test="parentId != null and parentId != ''"> and parent_Id = #{parentId} </if>
+		  		  <if test="sortOrder != null and sortOrder != ''"> and sort_Order = #{sortOrder} </if>
+		  		  <if test="showIndex != null and showIndex != ''"> and show_Index = #{showIndex} </if>
+		  		  <if test="isShow != null and isShow != ''"> and is_Show = #{isShow} </if>
+		  		  <if test="bannerUrl != null and bannerUrl != ''"> and banner_Url = #{bannerUrl} </if>
+		  		  <if test="iconUrl != null and iconUrl != ''"> and icon_Url = #{iconUrl} </if>
+		  		  <if test="imageUrl != null and imageUrl != ''"> and image_Url = #{imageUrl} </if>
+		  		  <if test="wapBannerUrl != null and wapBannerUrl != ''"> and wap_Banner_Url = #{wapBannerUrl} </if>
+		  		  <if test="level != null and level != ''"> and level = #{level} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="frontName != null and frontName != ''"> and front_Name = #{frontName} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.gonbike.system.domain.CategoriesDO">
+		insert into shop_categories
+		(
+			`id`, 
+			`name`, 
+			`keywords`, 
+			`front_Desc`, 
+			`parent_Id`, 
+			`sort_Order`, 
+			`show_Index`, 
+			`is_Show`, 
+			`banner_Url`, 
+			`icon_Url`, 
+			`image_Url`, 
+			`wap_Banner_Url`, 
+			`level`, 
+			`type`, 
+			`front_Name`
+		)
+		values
+		(
+			#{id}, 
+			#{name}, 
+			#{keywords}, 
+			#{frontDesc}, 
+			#{parentId}, 
+			#{sortOrder}, 
+			#{showIndex}, 
+			#{isShow}, 
+			#{bannerUrl}, 
+			#{iconUrl}, 
+			#{imageUrl}, 
+			#{wapBannerUrl}, 
+			#{level}, 
+			#{type}, 
+			#{frontName}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.gonbike.system.domain.CategoriesDO">
+		update shop_categories 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="keywords != null">`keywords` = #{keywords}, </if>
+			<if test="frontDesc != null">`front_Desc` = #{frontDesc}, </if>
+			<if test="parentId != null">`parent_Id` = #{parentId}, </if>
+			<if test="sortOrder != null">`sort_Order` = #{sortOrder}, </if>
+			<if test="showIndex != null">`show_Index` = #{showIndex}, </if>
+			<if test="isShow != null">`is_Show` = #{isShow}, </if>
+			<if test="bannerUrl != null">`banner_Url` = #{bannerUrl}, </if>
+			<if test="iconUrl != null">`icon_Url` = #{iconUrl}, </if>
+			<if test="imageUrl != null">`image_Url` = #{imageUrl}, </if>
+			<if test="wapBannerUrl != null">`wap_Banner_Url` = #{wapBannerUrl}, </if>
+			<if test="level != null">`level` = #{level}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="frontName != null">`front_Name` = #{frontName}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from shop_categories where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from shop_categories where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
