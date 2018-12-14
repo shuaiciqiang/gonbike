@@ -56,10 +56,6 @@ function load() {
 									title : '商品标题' 
 								},
 																{
-									field : 'supId', 
-									title : '供应商ID' 
-								},
-																{
 									field : 'supName', 
 									title : '供应商名称' 
 								},
@@ -67,9 +63,13 @@ function load() {
 									field : 'sellPoint', 
 									title : '商品卖点' 
 								},
+                            									{
+                                	field : 'integral',
+                                	title : '积分'
+                            	},
 																{
 									field : 'price', 
-									title : '商品价格，单位为：分' 
+									title : '商品价格RMB分'
 								},
 																{
 									field : 'num', 

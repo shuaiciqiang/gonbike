@@ -17,14 +17,10 @@
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">供应商ID：</label>
-								<div class="col-sm-8">
-									<input id="supId" name="supId" th:value="${items.supId}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
 								<label class="col-sm-3 control-label">供应商名称：</label>
 								<div class="col-sm-8">
+									<input id="supId" name="supId" th:value="${items.supId}" class="form-control" type="hidden">
+
 									<input id="supName" name="supName" th:value="${items.supName}" class="form-control" type="text">
 								</div>
 							</div>
@@ -34,8 +30,15 @@
 									<input id="sellPoint" name="sellPoint" th:value="${items.sellPoint}" class="form-control" type="text">
 								</div>
 							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label">商品积分：</label>
+								<div class="col-sm-8">
+									<input id="integral" name="integral" th:value="${items.integral}" class="form-control" type="text">
+								</div>
+							</div>
 														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品价格，单位为：分：</label>
+								<label class="col-sm-3 control-label">商品价格RMB分：</label>
 								<div class="col-sm-8">
 									<input id="price" name="price" th:value="${items.price}" class="form-control" type="text">
 								</div>

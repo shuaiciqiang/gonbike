@@ -4,14 +4,17 @@
 <mapper namespace="com.gonbike.system.dao.ItemsDao">
 
 	<select id="get" resultType="com.gonbike.system.domain.ItemsDO">
-		select `id` as id ,`title` as title ,`sup_Id` as supId ,`sup_Name` as supName ,`sell_Point` as sellPoint ,`price` as price ,`num` as num ,`limit_Num` as limitNum ,`image` as image ,`cid` as cid ,`ver_Id` as verId ,`status` as status ,`create_User_Id` as createUserId ,`create_User` as createUser ,`create_Time` as createTime ,`modify_User_Id` as modifyUserId ,`modify_User` as modifyUser ,`modify_Time` as modifyTime ,`text_Byte` as textByte  from shop_items where id = #{value}
+		select `id` as id ,`title` as title ,`sup_Id` as supId ,`sup_Name` as supName , integral as integral ,`sell_Point` as sellPoint ,`price` as price ,`num` as num ,`limit_Num` as limitNum ,`image` as image ,`cid` as cid ,`ver_Id` as verId ,`status` as status ,`create_User_Id` as createUserId ,`create_User` as createUser ,`create_Time` as createTime ,`modify_User_Id` as modifyUserId ,`modify_User` as modifyUser ,`modify_Time` as modifyTime ,`text_Byte` as textByte  from shop_items where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.gonbike.system.domain.ItemsDO">
-		select `id`,`title`,`sup_Id`,`sup_Name`,`sell_Point`,`price`,`num`,`limit_Num`,`image`,`cid`,`ver_Id`,`status`,`create_User_Id`,`create_User`,`create_Time`,`modify_User_Id`,`modify_User`,`modify_Time`,`text_Byte` from shop_items
+		select `id` as id ,`title` as title ,`sup_Id` as supId ,`sup_Name` as supName , integral as integral ,`sell_Point` as sellPoint ,`price` as price ,`num` as num ,`limit_Num` as limitNum ,`image` as image ,`cid` as cid ,`ver_Id` as verId ,`status` as status ,`create_User_Id` as createUserId ,`create_User` as createUser ,`create_Time` as createTime ,`modify_User_Id` as modifyUserId ,`modify_User` as modifyUser ,`modify_Time` as modifyTime ,`text_Byte` as textByte
+		from shop_items
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+			<if test="integral != null and integral != ''"> and integral = #{integral} </if>
+
+			<if test="title != null and title != ''"> and title = #{title} </if>
 		  		  <if test="supId != null and supId != ''"> and sup_Id = #{supId} </if>
 		  		  <if test="supName != null and supName != ''"> and sup_Name = #{supName} </if>
 		  		  <if test="sellPoint != null and sellPoint != ''"> and sell_Point = #{sellPoint} </if>
@@ -47,7 +50,9 @@
 		select count(*) from shop_items
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+			 <if test="integral != null and integral != ''"> and integral = #{integral} </if>
+
+			 <if test="title != null and title != ''"> and title = #{title} </if>
 		  		  <if test="supId != null and supId != ''"> and sup_Id = #{supId} </if>
 		  		  <if test="supName != null and supName != ''"> and sup_Name = #{supName} </if>
 		  		  <if test="sellPoint != null and sellPoint != ''"> and sell_Point = #{sellPoint} </if>
@@ -75,7 +80,8 @@
 			`sup_Id`, 
 			`sup_Name`, 
 			`sell_Point`, 
-			`price`, 
+			`price`,
+			integral,
 			`num`, 
 			`limit_Num`, 
 			`image`, 
@@ -96,7 +102,8 @@
 			#{supId}, 
 			#{supName}, 
 			#{sellPoint}, 
-			#{price}, 
+			#{price},
+			#{integral},
 			#{num}, 
 			#{limitNum}, 
 			#{image}, 
@@ -117,6 +124,8 @@
 		update shop_items 
 		<set>
 			<if test="title != null">`title` = #{title}, </if>
+			<if test="integral != null">`integral` = #{integral}, </if>
+
 			<if test="supId != null">`sup_Id` = #{supId}, </if>
 			<if test="supName != null">`sup_Name` = #{supName}, </if>
 			<if test="sellPoint != null">`sell_Point` = #{sellPoint}, </if>
