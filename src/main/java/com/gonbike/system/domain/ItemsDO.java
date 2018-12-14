@@ -59,7 +59,23 @@ public class ItemsDO implements Serializable {
 	 * 页面字段
 	 */
 	private String textByteStr;
-	
+	/***
+	 * 积分
+	 */
+	private Integer integral;
+	/***
+	 * 积分
+	 */
+	public Integer getIntegral() {
+		return integral;
+	}
+	/***
+	 * 积分
+	 */
+	public void setIntegral(Integer integral) {
+		this.integral = integral;
+	}
+
 	/***
 	 * 页面字段
 	 */

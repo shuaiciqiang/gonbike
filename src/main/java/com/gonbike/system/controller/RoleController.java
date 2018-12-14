@@ -56,7 +56,7 @@ public class RoleController extends BaseController {
 	@PostMapping("/save")
 	@ResponseBody()
 	R save(RoleDO role) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+		if (Constant.DEMO_ACCOUNT.equals(getUserName())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		if (roleService.save(role) > 0) {
@@ -71,7 +71,7 @@ public class RoleController extends BaseController {
 	@PostMapping("/update")
 	@ResponseBody()
 	R update(RoleDO role) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+		if (Constant.DEMO_ACCOUNT.equals(getUserName())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		if (roleService.update(role) > 0) {
@@ -86,7 +86,7 @@ public class RoleController extends BaseController {
 	@PostMapping("/remove")
 	@ResponseBody()
 	R save(Long id) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+		if (Constant.DEMO_ACCOUNT.equals(getUserName())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		if (roleService.remove(id) > 0) {
@@ -101,7 +101,7 @@ public class RoleController extends BaseController {
 	@PostMapping("/batchRemove")
 	@ResponseBody
 	R batchRemove(@RequestParam("ids[]") Long[] ids) {
-		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+		if (Constant.DEMO_ACCOUNT.equals(getUserName())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		int r = roleService.batchremove(ids);

@@ -15,7 +15,7 @@ public class BaseController {
 		return getUser().getUserId();
 	}
 
-	public String getUsername() {
+	public String getUserName() {
 		return getUser().getUserName();
 	}
 }

@@ -3,6 +3,7 @@ package com.gonbike.system.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.gonbike.common.utils.DateUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -75,6 +76,9 @@ public class ItemsController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("system:items:add")
 	public R save( ItemsDO items){
+		items.setCreateUserId(getUserId());
+		items.setCreateUser(getUserName());
+		items.setCreateTime(DateUtils.getDateTime());
 		if(itemsService.save(items)>0){
 			return R.ok();
 		}
@@ -87,6 +91,9 @@ public class ItemsController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("system:items:edit")
 	public R update( ItemsDO items){
+		items.setModifyUserId(getUserId());
+		items.setModifyUser(getUserName());
+		items.setModifyTime(DateUtils.getDateTime());
 		itemsService.update(items);
 		return R.ok();
 	}
