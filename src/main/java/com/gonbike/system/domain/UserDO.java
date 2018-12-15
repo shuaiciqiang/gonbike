@@ -52,6 +52,24 @@ public class UserDO implements Serializable {
     private String district;
     private Integer limit;
     private Integer offset;
+    private String sort;
+    private String order;
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
 
     public Integer getLimit() {
         return limit;

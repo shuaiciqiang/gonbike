@@ -46,8 +46,8 @@
 	</select>
 	<select id="listByUser" resultType="com.gonbike.system.domain.UserDO" parameterType="com.gonbike.system.domain.UserDO" >
 		select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype   from sys_user
-		<where>
-			<if test="fromType != null and fromType != ''"> and fromType = #{fromType} </if>
+		where 1=1
+			<if test="fromType != null "> and fromType = #{fromType} </if>
 
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 			<if test="username != null and username != ''"> and username = #{username} </if>
@@ -68,7 +68,7 @@
 			<if test="province != null and province != ''"> and province = #{province} </if>
 			<if test="city != null and city != ''"> and city = #{city} </if>
 			<if test="district != null and district != ''"> and district = #{district} </if>
-		</where>
+
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
 				order by ${sort} ${order}
@@ -83,7 +83,7 @@
 	</select>
  	<select id="count" resultType="int">
 		select count(1) from sys_user
-		 <where>
+		  where 1=1
 			 <if test="fromType != null and fromType != ''"> and fromType = #{fromType} </if>
 
 			 <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
@@ -105,12 +105,12 @@
 		  		  <if test="province != null and province != ''"> and province = #{province} </if>
 		  		  <if test="city != null and city != ''"> and city = #{city} </if>
 		  		  <if test="district != null and district != ''"> and district = #{district} </if>
-		  		</where>
+
 	</select>
 	<select id="countByUser" resultType="int"  parameterType="com.gonbike.system.domain.UserDO">
 		select count(1) from sys_user
-		<where>
-			<if test="fromType != null and fromType != ''"> and fromType = #{fromType} </if>
+		where 1=1
+			<if test="fromType != null "> and fromType = #{fromType} </if>
 
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 			<if test="username != null and username != ''"> and username = #{username} </if>
@@ -131,7 +131,7 @@
 			<if test="province != null and province != ''"> and province = #{province} </if>
 			<if test="city != null and city != ''"> and city = #{city} </if>
 			<if test="district != null and district != ''"> and district = #{district} </if>
-		</where>
+
 	</select>
 	<insert id="save" parameterType="com.gonbike.system.domain.UserDO" useGeneratedKeys="true" keyProperty="userId">
 		insert into sys_user

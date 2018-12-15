@@ -9,11 +9,11 @@
 
 	<select id="list" resultType="${package}.domain.${className}DO">
 		select #foreach($column in $columns) $column.columnName as $column.attrname #if($velocityCount != $columns.size()),#end#end from ${tableName}
-        <where>  
+        where 1=1
 		  #foreach($column in $columns)
 		  <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
 		  #end
-		</where>
+
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -29,11 +29,11 @@
 	
  	<select id="count" resultType="int">
 		select count(1) from ${tableName}
-		 <where>  
+		 where 1=1
 		  #foreach($column in $columns)
 		  <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
 		  #end
-		</where>
+
 	</select>
 	 
 	<insert id="save" parameterType="${package}.domain.${className}DO"#if($pk.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$pk.attrname"#end>

@@ -1,20 +1,17 @@
 package com.gonbike.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.gonbike.common.controller.BaseController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.gonbike.system.domain.UserDO;
 import com.gonbike.system.service.UserService;
@@ -32,6 +29,7 @@ import com.gonbike.common.utils.R;
  
 @Controller
 @RequestMapping("/member/user")
+@Api(value="会员管理",tags={"会员操作操作接口"})
 public class MemberController extends BaseController {
 	@Autowired
 	private UserService userService;
@@ -119,5 +117,18 @@ public class MemberController extends BaseController {
 		userService.batchremove(userIds);//.batchRemove(userIds);
 		return R.ok();
 	}
-	
+
+	@RequestMapping(value="/pub/login",method= {RequestMethod.GET,RequestMethod.POST})
+	@ApiOperation(value="商城会员登录",httpMethod="POST")
+	public R login(){
+		Map<String,Object> map=new HashMap<String,Object>();
+		UserDO user =new UserDO();
+		user.setFromType(0);
+		user.setUserId(1l);
+		user.setUsername("帅词强");
+		map.put("user",user);
+		return R.ok(map);
+	}
+
+
 }
