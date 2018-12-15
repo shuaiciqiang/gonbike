@@ -216,11 +216,11 @@ function batchRemove() {
 			},
 			url : prefix + '/batchRemove',
 			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
+				if (r.statusCode == 200) {
+					layer.msg(r.message);
 					reLoad();
 				} else {
-					layer.msg(r.msg);
+					layer.msg(r.message);
 				}
 			}
 		});

@@ -7,8 +7,8 @@ public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 
 	public R() {
-		put("code", 0);
-		put("msg", "操作成功");
+		put("statusCode", 200);
+		put("message", "操作成功");
 	}
 
 	public static R error() {
@@ -19,16 +19,17 @@ public class R extends HashMap<String, Object> {
 		return error(500, msg);
 	}
 
-	public static R error(int code, String msg) {
+	public static R error(int statusCode, String message) {
 		R r = new R();
-		r.put("code", code);
-		r.put("msg", msg);
+		r.put("statusCode", statusCode);
+		r.put("message", message);
+
 		return r;
 	}
 
-	public static R ok(String msg) {
+	public static R ok(String message) {
 		R r = new R();
-		r.put("msg", msg);
+		r.put("message", message);
 		return r;
 	}
 

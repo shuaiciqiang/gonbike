@@ -69,54 +69,21 @@
 									<input id="cid" name="cid" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">版本号：</label>
-								<div class="col-sm-8">
-									<input id="verId" name="verId" class="form-control" type="text">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">商品标签：</label>
+								<div class="col-sm-8" id="shopItemLabelList">
+
 								</div>
 							</div>
+
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">商品状态，1-正常，2-下架，3-删除：</label>
 								<div class="col-sm-8">
+									<input id="shopItemLabels" name="itemLabels" type="hidden"/>
 									<input id="status" name="status" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">创建人ID：</label>
-								<div class="col-sm-8">
-									<input id="createUserId" name="createUserId" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">创建人：</label>
-								<div class="col-sm-8">
-									<input id="createUser" name="createUser" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">创建时间：</label>
-								<div class="col-sm-8">
-									<input id="createTime" name="createTime" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">修改人ID：</label>
-								<div class="col-sm-8">
-									<input id="modifyUserId" name="modifyUserId" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">修改人：</label>
-								<div class="col-sm-8">
-									<input id="modifyUser" name="modifyUser" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">更新时间：</label>
-								<div class="col-sm-8">
-									<input id="modifyTime" name="modifyTime" class="form-control" type="text">
-								</div>
-							</div>
+
 														<div class="form-group">	
 								<label class="col-sm-3 control-label">已字节的形式保存富文本内容：</label>
 								<div class="col-sm-8">
@@ -135,7 +102,8 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/items/add.js">
+	<script type="text/javascript" src="/js/appjs/system/items/add.js?verId=24">
 	</script>
+
 </body>
 </html>

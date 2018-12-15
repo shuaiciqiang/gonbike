@@ -17,9 +17,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface LabelDao {
 
 	LabelDO get(Integer id);
-	
+	List<LabelDO> getLabelListByItemId(String itemId);
 	List<LabelDO> list(Map<String, Object> map);
-	
+	List<LabelDO> getLabelList(LabelDO label);
 	int count(Map<String, Object> map);
 	
 	int save(LabelDO label);

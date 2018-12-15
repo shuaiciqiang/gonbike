@@ -20,11 +20,11 @@ function update() {
 			parent.layer.alert("网络连接超时");
 		},
 		success : function(data) {
-			if (data.code == 0) {
-				parent.layer.msg(data.msg);
+			if (data.statusCode == 200) {
+				parent.layer.msg(data.message);
 
 			} else {
-				parent.layer.msg(data.msg);
+				parent.layer.msg(data.message);
 			}
 
 		}

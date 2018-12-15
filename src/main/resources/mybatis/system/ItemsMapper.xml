@@ -10,7 +10,7 @@
 	<select id="list" resultType="com.gonbike.system.domain.ItemsDO">
 		select `id` as id ,`title` as title ,`sup_Id` as supId ,`sup_Name` as supName , integral as integral ,`sell_Point` as sellPoint ,`price` as price ,`num` as num ,`limit_Num` as limitNum ,`image` as image ,`cid` as cid ,`ver_Id` as verId ,`status` as status ,`create_User_Id` as createUserId ,`create_User` as createUser ,`create_Time` as createTime ,`modify_User_Id` as modifyUserId ,`modify_User` as modifyUser ,`modify_Time` as modifyTime ,`text_Byte` as textByte
 		from shop_items
-        <where>  
+        where 1=1
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="integral != null and integral != ''"> and integral = #{integral} </if>
 
@@ -32,7 +32,7 @@
 		  		  <if test="modifyUser != null and modifyUser != ''"> and modify_User = #{modifyUser} </if>
 		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_Time = #{modifyTime} </if>
 		  		  <if test="textByte != null and textByte != ''"> and text_Byte = #{textByte} </if>
-		  		</where>
+
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -47,8 +47,8 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from shop_items
-		 <where>  
+		select count(1) from shop_items
+		where 1=1
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 			 <if test="integral != null and integral != ''"> and integral = #{integral} </if>
 
@@ -70,7 +70,7 @@
 		  		  <if test="modifyUser != null and modifyUser != ''"> and modify_User = #{modifyUser} </if>
 		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_Time = #{modifyTime} </if>
 		  		  <if test="textByte != null and textByte != ''"> and text_Byte = #{textByte} </if>
-		  		</where>
+
 	</select>
 	 
 	<insert id="save" parameterType="com.gonbike.system.domain.ItemsDO" useGeneratedKeys="true" keyProperty="id">
@@ -158,4 +158,22 @@
 		</foreach>
 	</delete>
 
+	<insert id="insertItemLabel" parameterType="com.gonbike.system.domain.ItemLabelDO">
+		insert into shop_item_label (
+			item_Id,label_Id,create_User_Id,create_User,create_Date
+		)
+		VALUES
+		(
+			#{itemId},#{labelId},#{createUserId},#{createUser},#{createDate}
+		)
+	</insert>
+
+	<delete id="deleteItemLabelByItemId" parameterType="java.lang.Long">
+		delete from shop_item_label where item_Id=#{itemId}
+	</delete>
+
+	<update id="updateItemLabelByItemId" parameterType="java.lang.Long">
+			update shop_item_label a set a.label_Code = (select b.labelCode from shop_labels b where a.label_Id=b.id)
+			where a.item_Id=#{itemId}
+	</update>
 </mapper>

@@ -9,7 +9,7 @@
 
 	<select id="list" resultType="com.gonbike.system.domain.LabelDO">
 		select `id`,`labelCode`,`labelName`,`indexQuery`,`createUserId`,`createUser`,`createDate`,`modifyUserId`,`modifyUser`,`modifyDate` from shop_labels
-        <where>  
+        where 1=1
 		  		  <if test="labelCode != null and labelCode != ''"> and labelCode = #{labelcode} </if>
 		  		  <if test="labelName != null and labelName != ''"> and labelName = #{labelname} </if>
 		  		  <if test="indexQuery != null and indexQuery != ''"> and indexQuery = #{indexquery} </if>
@@ -19,7 +19,7 @@
 		  		  <if test="modifyUserId != null and modifyUserId != ''"> and modifyUserId = #{modifyuserid} </if>
 		  		  <if test="modifyUser != null and modifyUser != ''"> and modifyUser = #{modifyuser} </if>
 		  		  <if test="modifyDate != null and modifyDate != ''"> and modifyDate = #{modifydate} </if>
-		  		</where>
+
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -35,7 +35,7 @@
 	
  	<select id="count" resultType="int">
 		select count(1) from shop_labels
-		 <where>  
+		where 1=1
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="labelCode != null and labelCode != ''"> and labelCode = #{labelcode} </if>
 		  		  <if test="labelname != null and labelname != ''"> and labelName = #{labelname} </if>
@@ -46,9 +46,34 @@
 		  		  <if test="modifyuserid != null and modifyuserid != ''"> and modifyUserId = #{modifyuserid} </if>
 		  		  <if test="modifyuser != null and modifyuser != ''"> and modifyUser = #{modifyuser} </if>
 		  		  <if test="modifydate != null and modifydate != ''"> and modifyDate = #{modifydate} </if>
-		  		</where>
+
 	</select>
-	 
+
+	<select id="getLabelListByItemId" resultType="com.gonbike.system.domain.LabelDO" parameterType="java.lang.String">
+		select b.Id as id,b.labelCode as labelCode,b.labelName as labelName
+		from shop_item_label a
+		left join shop_labels b on a.label_Id =b.id
+		where 1=1 and a.item_Id=#{itemId}
+	</select>
+
+
+	 <select id="getLabelList" resultType="com.gonbike.system.domain.LabelDO" parameterType="com.gonbike.system.domain.LabelDO">
+		 select `id`,`labelCode`,`labelName`,`indexQuery`,`createUserId`,`createUser`,`createDate`,`modifyUserId`,`modifyUser`,`modifyDate` from shop_labels
+		 where 1=1
+		 <if test="labelCode != null and labelCode != ''"> and labelCode = #{labelcode} </if>
+		 <if test="labelName != null and labelName != ''"> and labelName = #{labelname} </if>
+		 <if test="indexQuery != null and indexQuery != ''"> and indexQuery = #{indexquery} </if>
+		 <if test="createUserId != null and createUserId != ''"> and createUserId = #{createuserid} </if>
+		 <if test="createUser != null and createUser != ''"> and createUser = #{createuser} </if>
+		 <if test="createDate != null and createDate != ''"> and createDate = #{createdate} </if>
+		 <if test="modifyUserId != null and modifyUserId != ''"> and modifyUserId = #{modifyuserid} </if>
+		 <if test="modifyUser != null and modifyUser != ''"> and modifyUser = #{modifyuser} </if>
+		 <if test="modifyDate != null and modifyDate != ''"> and modifyDate = #{modifydate} </if>
+
+		  order by id desc
+
+	 </select>
+
 	<insert id="save" parameterType="com.gonbike.system.domain.LabelDO" useGeneratedKeys="true" keyProperty="id">
 		insert into shop_labels
 		(

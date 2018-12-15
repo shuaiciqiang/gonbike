@@ -1,5 +1,7 @@
 package com.gonbike.system.service.impl;
 
+import com.gonbike.common.utils.HelpUtil;
+import com.gonbike.system.domain.ItemLabelDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,21 +36,63 @@ public class ItemsServiceImpl implements ItemsService {
 	
 	@Override
 	public int save(ItemsDO items){
-		return itemsDao.save(items);
+		//System.out.println(items.getItemLabels());
+
+		int vT= itemsDao.save(items);
+		if (items.getId()!=null&&items.getItemLabels()!=null){
+			String[] labelIds=items.getItemLabels().split(",");
+			for(String vLabelId:labelIds){
+				if (vLabelId!=null&&!vLabelId.trim().equals("")){
+					ItemLabelDO vItemLabel=new ItemLabelDO();
+					vItemLabel.setLabelId(Integer.valueOf(vLabelId));
+					vItemLabel.setItemId(items.getId());
+					vItemLabel.setCreateDate(HelpUtil.getDateTime());
+					vItemLabel.setCreateUser(items.getCreateUser());
+					vItemLabel.setCreateUserId(items.getCreateUserId());
+					itemsDao.insertItemLabel(vItemLabel);
+				}
+			}
+			itemsDao.updateItemLabelByItemId(items.getId());
+		}
+
+		return vT;
 	}
 	
 	@Override
 	public int update(ItemsDO items){
+		//System.out.println(items.getItemLabels());
+		if (items.getId()!=null) {
+			itemsDao.deleteItemLabelByItemId(items.getId());
+		}
+		if (items.getId()!=null&&items.getItemLabels()!=null){
+			String[] labelIds=items.getItemLabels().split(",");
+			for(String vLabelId:labelIds){
+				if (vLabelId!=null&&!vLabelId.trim().equals("")){
+					ItemLabelDO vItemLabel=new ItemLabelDO();
+					vItemLabel.setLabelId(Integer.valueOf(vLabelId));
+					vItemLabel.setItemId(items.getId());
+					vItemLabel.setCreateDate(HelpUtil.getDateTime());
+					vItemLabel.setCreateUser(items.getModifyUser());
+					vItemLabel.setCreateUserId(items.getModifyUserId());
+					itemsDao.insertItemLabel(vItemLabel);
+				}
+			}
+			itemsDao.updateItemLabelByItemId(items.getId());
+		}
 		return itemsDao.update(items);
 	}
 	
 	@Override
 	public int remove(Long id){
+		itemsDao.deleteItemLabelByItemId(id);
 		return itemsDao.remove(id);
 	}
 	
 	@Override
 	public int batchRemove(Long[] ids){
+		for(Long id:ids){
+			itemsDao.deleteItemLabelByItemId(id);
+		}
 		return itemsDao.batchRemove(ids);
 	}
 	

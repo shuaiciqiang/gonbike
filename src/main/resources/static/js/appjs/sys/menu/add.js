@@ -31,14 +31,14 @@ function submit01() {
 			laryer.alert("Connection error");
 		},
 		success : function(data) {
-			if (data.code == 0) {
+			if (data.statusCode == 200) {
 				parent.layer.msg("保存成功");
 				parent.reLoad();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
 
 			} else {
-				layer.alert(data.msg)
+				layer.alert(data.message)
 			}
 		}
 	});

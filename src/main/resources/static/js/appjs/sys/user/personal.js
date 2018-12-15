@@ -21,10 +21,10 @@ $("#base_save").click(function () {
                     laryer.alert("Connection error");
                 },
                 success : function(data) {
-                    if (data.code == 0) {
+                    if (data.statusCode == 200) {
                         parent.layer.msg("更新成功");
                     } else {
-                        parent.layer.alert(data.msg)
+                        parent.layer.alert(data.message)
                     }
                 }
             });

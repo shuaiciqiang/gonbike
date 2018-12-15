@@ -55,6 +55,23 @@ public class ItemsDO implements Serializable {
 	//已字节的形式保存富文本内容
 	private byte[] textByte;
 
+	/**
+	 * 该商品ID对应的标签集合，是逗号分割的字符串
+	 */
+	private String itemLabels;
+	/**
+	 * 该商品ID对应的标签集合，是逗号分割的字符串
+	 */
+	public String getItemLabels() {
+		return itemLabels;
+	}
+	/**
+	 * 该商品ID对应的标签集合，是逗号分割的字符串
+	 */
+	public void setItemLabels(String itemLabels) {
+		this.itemLabels = itemLabels;
+	}
+
 	/***
 	 * 页面字段
 	 */

@@ -1,5 +1,7 @@
 package com.gonbike.system.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +56,25 @@ public class LabelController extends BaseController {
 		PageUtils pageUtils = new PageUtils(labelList, total);
 		return pageUtils;
 	}
-	
+	@ResponseBody
+	@GetMapping("/allList")
+	public R getAllLabelList(){
+		Map<String,Object> map=new HashMap<String,Object>();
+		String itemId=request.getParameter("itemId");//如果有商品Id.则获取商品的所属标签列表
+		List<LabelDO> itemLabelList =new ArrayList<LabelDO>();
+		if (itemId!=null) {
+			if (!itemId.trim().toLowerCase().equals("null")||!itemId.trim().toLowerCase().equals("undefined")) {
+				itemLabelList = labelService.getLabelListByItemId(itemId);
+			}
+
+		}
+		List<LabelDO> vList =new ArrayList<LabelDO>();
+		LabelDO vLabelDO=new LabelDO();
+		vList =labelService.getLabelList(vLabelDO);
+		map.put("list",vList);
+		map.put("itemLabelList",itemLabelList);
+		return R.ok(map);
+	}
 	@GetMapping("/add")
 	@RequiresPermissions("system:label:add")
 	String add(){

@@ -1,5 +1,6 @@
 package com.gonbike.system.dao;
 
+import com.gonbike.system.domain.ItemLabelDO;
 import com.gonbike.system.domain.ItemsDO;
 
 import java.util.List;
@@ -19,7 +20,9 @@ public interface ItemsDao {
 	ItemsDO get(Long id);
 	
 	List<ItemsDO> list(Map<String, Object> map);
-	
+	void insertItemLabel(ItemLabelDO itemLabel);
+	void deleteItemLabelByItemId(Long itemId);
+	void updateItemLabelByItemId(Long itemId);
 	int count(Map<String, Object> map);
 	
 	int save(ItemsDO items);
