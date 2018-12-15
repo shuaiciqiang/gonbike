@@ -5,6 +5,7 @@ import com.gonbike.system.domain.UserDO;
 import java.util.List;
 import java.util.Map;
 
+import com.gonbike.system.domain.UserToken;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -17,7 +18,10 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserDao {
 
 	UserDO get(Long userId);
-	
+	UserDO getUserForLogin(UserDO user);
+	void insertUserToken(UserToken userToken);
+	void updateUserToken(UserToken userToken);
+	int countUserTokenByUserId(String userId);
 	List<UserDO> list(Map<String, Object> map);
 	List<UserDO> listByUser(UserDO user);
 	int count(Map<String, Object> map);
@@ -31,5 +35,5 @@ public interface UserDao {
 	int batchRemove(Long[] userIds);
 	
 	Long[] listAllDept();
-
+	UserToken getUserTokenByTokenId(String tokenId);
 }

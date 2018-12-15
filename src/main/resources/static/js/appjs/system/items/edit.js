@@ -1,6 +1,13 @@
 $().ready(function() {
+    $('.summernote').summernote({
+        height:'220px',
+        lang : 'zh-CN'
+    });
 	validateRule();
     init();
+    //文本编辑器内容回显
+	var textByteStr=$("#textByteStr").val();
+    $('.summernote').summernote('code',textByteStr);
 });
 
 $.validator.setDefaults({
@@ -35,6 +42,8 @@ function init(){
     });
 }
 function update() {
+    var content_sn = $("#content_sn").summernote('code');
+    $("#textByteStr").val(content_sn);
     var itemLabels="";
     $("input[data='shopItemLabel']").each(function(){
     	if(this.checked) {

@@ -35,13 +35,13 @@ function save(status) {
 			parent.layer.alert("Connection error");
 		},
 		success : function(data) {
-			if (data.code == 0) {
+			if (data.statusCode == 200) {
 				parent.layer.msg("操作成功");
 				parent.reLoad();
 				
 
 			} else {
-				parent.layer.alert(data.msg)
+				parent.layer.alert(data.message)
 			}
 
 		}

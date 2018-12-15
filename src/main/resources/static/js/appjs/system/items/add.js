@@ -1,4 +1,8 @@
 $().ready(function() {
+    $('.summernote').summernote({
+        height:'220px',
+        lang : 'zh-CN'
+    });
 	validateRule();
     init();
 });
@@ -26,6 +30,8 @@ function init(){
     });
 }
 function save() {
+    var content_sn = $("#content_sn").summernote('code');
+    $("#textByteStr").val(content_sn);
     var itemLabels="";
     $("input[data='shopItemLabel']").each(function(){
         if(this.checked) {

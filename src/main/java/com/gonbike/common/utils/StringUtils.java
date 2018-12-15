@@ -1,7 +1,7 @@
 package com.gonbike.common.utils;
 
 /**
- * @author bootdo
+ * @author Shuaige
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils{
 }

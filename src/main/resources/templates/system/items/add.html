@@ -10,87 +10,81 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">商品标题：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-2 control-label">商品标题：</label>
+								<div class="col-sm-4">
 									<input id="title" name="title" class="form-control" type="text">
 								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">供应商ID：</label>
-								<div class="col-sm-8">
-									<input id="supId" name="supId" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">供应商名称：</label>
-								<div class="col-sm-8">
+
+								<label class="col-sm-2 control-label">供应商名称：</label>
+								<div class="col-sm-4">
+									<input id="supId" name="supId" class="form-control" type="hidden">
 									<input id="supName" name="supName" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品卖点：</label>
-								<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品卖点：</label>
+								<div class="col-sm-4">
 									<input id="sellPoint" name="sellPoint" class="form-control" type="text">
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">商品积分：</label>
-								<div class="col-sm-8">
+
+								<label class="col-sm-2 control-label">商品积分：</label>
+								<div class="col-sm-4">
 									<input id="integral" name="integral" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品价格RMB分：</label>
-								<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品价格RMB分：</label>
+								<div class="col-sm-4">
 									<input id="price" name="price" class="form-control" type="text">
 								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">库存数量：</label>
-								<div class="col-sm-8">
+
+								<label class="col-sm-2 control-label">库存数量：</label>
+								<div class="col-sm-4">
 									<input id="num" name="num" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">售卖数量限制：</label>
-								<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">售卖数量限制：</label>
+								<div class="col-sm-4">
 									<input id="limitNum" name="limitNum" class="form-control" type="text">
 								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品图片主图：</label>
-								<div class="col-sm-8">
+
+								<label class="col-sm-2 control-label">商品图片主图：</label>
+								<div class="col-sm-4">
 									<input id="image" name="image" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">所属类目，叶子类目：</label>
-								<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">所属类目，叶子类目：</label>
+								<div class="col-sm-4">
 									<input id="cid" name="cid" class="form-control" type="text">
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">商品标签：</label>
-								<div class="col-sm-8" id="shopItemLabelList">
 
-								</div>
-							</div>
-
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品状态，1-正常，2-下架，3-删除：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-2 control-label">商品状态，1-正常，2-下架，3-删除：</label>
+								<div class="col-sm-4">
 									<input id="shopItemLabels" name="itemLabels" type="hidden"/>
 									<input id="status" name="status" class="form-control" type="text">
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品标签：</label>
+								<div class="col-sm-9" id="shopItemLabelList">
 
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">已字节的形式保存富文本内容：</label>
-								<div class="col-sm-8">
-									<input id="textByte" name="textByte" class="form-control" type="text">
 								</div>
 							</div>
-																					<div class="form-group">
+
+
+
+							<div class="form-group">
+								<input id="textByteStr" name="textByteStr" class="form-control" type="hidden">
+								<label class="col-sm-2 control-label">内容：</label>
+								<div class="col-sm-10">
+									<div class="ibox-content no-padding">
+										<div id="content_sn" class="summernote"></div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>
 								</div>

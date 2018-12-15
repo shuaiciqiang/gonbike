@@ -32,6 +32,6 @@ public class FileUtil {
 	}
 
 	public static String renameToUUID(String fileName) {
-		return UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+		return UUID.randomUUID().toString().replace("-","") + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
 	}
 }

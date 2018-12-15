@@ -1,7 +1,7 @@
 package com.gonbike.common.redis.shiro;
 
 /**
- * @author bootdo 77509028@qq.com
+ * @author 77509028@qq.com
  * @version V1.0
  */
 

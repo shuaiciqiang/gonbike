@@ -131,12 +131,20 @@ function SmoothlyMenu() {
     } else {
         $('#side-menu').removeAttr('style');
     }
+
 }
 
 
 //主题设置
 $(function () {
-
+//将所有的class为J_menuItem的菜单加上参数token=?
+ //   var token=sessionStorage.getItem("gonbikeToken");
+ //   if (token!=null&&token!=""&&token!="undefined"){
+ //       $(".J_menuItem").each(function(){
+  //          var href=this.href;
+  //          this.href=href+"?token="+token;
+  //      })
+  //  }
     // 顶部菜单固定
     $('#fixednavbar').click(function () {
         if ($('#fixednavbar').is(':checked')) {

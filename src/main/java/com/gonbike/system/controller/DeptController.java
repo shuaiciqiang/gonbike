@@ -22,7 +22,7 @@ import java.util.Map;
  * 
  * @author Shuaige
  * @email 77509028@qq.com
- * @date 2018-09-27 14:40:36
+ * @date 2018-12-12 14:40:36
  */
 
 @Controller
@@ -38,7 +38,6 @@ public class DeptController extends BaseController {
 		return prefix + "/dept";
 	}
 
-	@ApiOperation(value="获取部门列表", notes="")
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("system:sysDept:sysDept")

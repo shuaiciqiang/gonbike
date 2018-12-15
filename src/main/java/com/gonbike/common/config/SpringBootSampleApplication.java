@@ -1,6 +1,5 @@
 package com.gonbike.common.config;//package com.gonbike.common.config;
 //
-//import com.gonbike.BootdoApplication;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //import org.springframework.boot.builder.SpringApplicationBuilder;

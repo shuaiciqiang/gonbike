@@ -44,7 +44,7 @@
 //             },
 //             success : function(data,textStatus) {
 //                 // 成功回调方法增强处理
-//                 if(403==data.code){
+//                 if(403==data.statusCode){
 //                     parent.location.href = '/login';
 //                 }
 //                 callback.success(data);

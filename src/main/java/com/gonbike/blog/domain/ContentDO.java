@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Shuaige
  * @email 77509028@qq.com
- * @date 2018-09-22 13:16:10
+ * @date 2018-12-12 13:16:10
  */
 public class ContentDO implements Serializable {
 	private static final long serialVersionUID = 1L;

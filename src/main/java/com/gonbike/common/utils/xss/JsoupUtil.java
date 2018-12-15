@@ -9,10 +9,6 @@ import org.jsoup.safety.Whitelist;
 
 /**
  * xss非法标签过滤
- * {@link http://www.jianshu.com/p/32abc12a175a?nomobile=yes}
- * @author yangwenkui
- * @version v2.0
- * @time 2017年4月27日 下午5:47:09
  */
 public class JsoupUtil {
 

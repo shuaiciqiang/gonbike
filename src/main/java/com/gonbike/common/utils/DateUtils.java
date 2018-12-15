@@ -32,7 +32,7 @@ public class DateUtils {
         return null;
     }
 	/**
-	 * 返回2018-08-20 12:15:18格式
+	 * 返回2018-12-12 12:15:18格式
 	 * @return
 	 */
 	public static String getDateTime() {

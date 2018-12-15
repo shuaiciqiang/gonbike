@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author bootdo 77509028@qq.com
+ * @author 77509028@qq.com
  * @version V1.0
  */
 public class RedisSessionDAO extends AbstractSessionDAO {

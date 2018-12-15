@@ -5,11 +5,15 @@ import com.gonbike.common.controller.BaseController;
 import com.gonbike.common.domain.FileDO;
 import com.gonbike.common.domain.Tree;
 import com.gonbike.common.service.FileService;
+import com.gonbike.common.utils.HelpUtil;
 import com.gonbike.common.utils.MD5Utils;
 import com.gonbike.common.utils.R;
 import com.gonbike.common.utils.ShiroUtils;
 import com.gonbike.system.domain.MenuDO;
+import com.gonbike.system.domain.UserDO;
+import com.gonbike.system.domain.UserToken;
 import com.gonbike.system.service.MenuService;
+import com.gonbike.system.service.UserService;
 import io.swagger.models.auth.In;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,7 +28,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController extends BaseController {
@@ -34,6 +43,8 @@ public class LoginController extends BaseController {
 	MenuService menuService;
 	@Autowired
 	FileService fileService;
+	@Autowired
+	UserService userService;
 	
 	/**
 	 * 项目启动，默认进入页面
@@ -75,16 +86,51 @@ public class LoginController extends BaseController {
 	@PostMapping("/login")
 	@ResponseBody
 	R ajaxLogin(String username, String password) {
-
-		password = MD5Utils.encrypt(username, password);
-		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-		Subject subject = SecurityUtils.getSubject();
-		try {
-			subject.login(token);
-			return R.ok();
-		} catch (AuthenticationException e) {
-			return R.error("用户或密码错误");
+		String token=null;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().toString().equals("JSESSIONID")){
+				token=cookie.getValue().toUpperCase().replace("-","");
+			}
 		}
+		Map<String,Object> map=new HashMap<>();
+		password = MD5Utils.encrypt(username, password);
+		//去数据库校验
+		UserDO vUser=new UserDO();
+		vUser.setUsername(username);
+		vUser.setPassword(password);
+		UserDO user=userService.getUserForLogin(vUser);
+		if (user==null){
+			return R.error("用户或密码错误");
+		}else {
+			//创建token
+
+			UserToken userToken=new UserToken();
+			userToken.setId(user.getUserId());
+			userToken.setUserId(user.getUserId());
+			if (token==null) {
+				userToken.setToken(HelpUtil.getGUID());
+			}else{
+				userToken.setToken(token);
+			}
+			userToken.setCreateTime(HelpUtil.getDateTime());
+
+			userService.saveUserToken(userToken);
+			map.put("token",userToken.getToken());
+			map.put("expireTime",userToken.getExpireTime());
+/*
+			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+			Subject subject = SecurityUtils.getSubject();
+
+			try {
+				subject.login(token);
+				return R.ok();
+			} catch (AuthenticationException e) {
+				e.printStackTrace();
+				return R.error("用户或密码错误");
+			}
+			*/
+		}
+		return R.ok(map);
 	}
 
 	@GetMapping("/logout")

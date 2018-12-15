@@ -128,11 +128,11 @@ function remove(id) {
                 'id': id
             },
             success: function (data) {
-                if (data.code == 0) {
+                if (data.statusCode == 0) {
                     layer.msg("删除成功");
                     reLoad();
                 } else {
-                    layer.msg(data.msg);
+                    layer.msg(data.message);
                 }
             }
         });

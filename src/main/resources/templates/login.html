@@ -106,7 +106,10 @@
                     var index = layer.load(1, {
                         shade: [0.1,'#fff'] //0.1透明度的白色背景
                     });
-                    parent.location.href = '/index';
+                    sessionStorage.setItem("gonbikeToken",r.token);
+                    sessionStorage.setItem("gonbikeTokenExpireTime",r.expireTime);
+                   // parent.location.href = '/index?token='+r.token;
+                     parent.location.href = '/index';
                 } else {
                     layer.msg(r.message);
                 }

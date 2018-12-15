@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * @author Shuaige
  * @email 77509028@qq.com
- * @date 2018-09-25 15:09:21
+ * @date 2018-12-12 15:09:21
  */
 public class TaskDO implements Serializable {
     private static final long serialVersionUID = 1L;

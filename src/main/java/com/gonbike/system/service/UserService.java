@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.gonbike.system.domain.UserToken;
 import com.gonbike.system.vo.UserVO;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public interface UserService {
 	UserDO get(Long id);
-
+	UserDO getUserForLogin(UserDO user);
+	void saveUserToken(UserToken userToken);
 	List<UserDO> list(Map<String, Object> map);
 	List<UserDO> listByUser(UserDO user);
 	int count(Map<String, Object> map);
@@ -42,7 +44,7 @@ public interface UserService {
 	 * @return
 	 */
 	int updatePersonal(UserDO userDO);
-
+	UserToken getUserTokenByTokenId(String tokenId);
 	/**
 	 * 更新个人图片
 	 * @param file 图片

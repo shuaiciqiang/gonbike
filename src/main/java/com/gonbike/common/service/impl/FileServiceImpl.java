@@ -21,7 +21,7 @@ public class FileServiceImpl implements FileService {
 	private FileDao sysFileMapper;
 
 	@Autowired
-	private GonbikeConfig bootdoConfig;
+	private GonbikeConfig gonbikeConfig;
 	@Override
 	public FileDO get(Long id){
 		return sysFileMapper.get(id);
@@ -62,7 +62,7 @@ public class FileServiceImpl implements FileService {
 		Boolean isExist = false;
 		if (!StringUtils.isEmpty(url)) {
 			String filePath = url.replace("/files/", "");
-			filePath = bootdoConfig.getUploadPath() + filePath;
+			filePath = gonbikeConfig.getUploadPath() + filePath;
 			File file = new File(filePath);
 			if (file.exists()) {
 				isExist = true;

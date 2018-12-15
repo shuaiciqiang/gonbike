@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 
  * @author Shuaige
  * @email 77509028@qq.com
- * @date 2018-09-27 14:28:36
+ * @date 2018-12-12 14:28:36
  */
 public class DeptDO implements Serializable {
 	private static final long serialVersionUID = 1L;

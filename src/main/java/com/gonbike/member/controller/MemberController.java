@@ -118,9 +118,11 @@ public class MemberController extends BaseController {
 		return R.ok();
 	}
 
+
+	@ResponseBody
 	@RequestMapping(value="/pub/login",method= {RequestMethod.GET,RequestMethod.POST})
-	@ApiOperation(value="商城会员登录",httpMethod="POST")
-	public R login(){
+	@ApiOperation(value="商城会员登录",httpMethod="POST",notes="username是登录用户名password是登录密码")
+	public R login(String username,String password){
 		Map<String,Object> map=new HashMap<String,Object>();
 		UserDO user =new UserDO();
 		user.setFromType(0);
@@ -130,5 +132,17 @@ public class MemberController extends BaseController {
 		return R.ok(map);
 	}
 
+	@ResponseBody
+	@RequestMapping(value="/api/user/info/{userId}",method= RequestMethod.GET)
+	@ApiOperation(value="商城会员个人信息",httpMethod="GET",notes ="userId是个人账号Id")
+	public R getUserInfo(@PathVariable String userId){
+		Map<String,Object> map=new HashMap<String,Object>();
+		UserDO user =new UserDO();
+		user.setFromType(0);
+		user.setUserId(Long.valueOf(userId));
+		user.setUsername("帅词强");
+		map.put("user",user);
+		return R.ok(map);
+	}
 
 }

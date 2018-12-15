@@ -263,7 +263,7 @@ $(function(){
     submitDone: function (data) {
       console.log(data);
 
-      if ($.isPlainObject(data) && data.code === 0) {
+      if ($.isPlainObject(data) && data.statusCode === 0) {
         if (data.url) {
           this.url = data.url;
 
@@ -277,9 +277,9 @@ $(function(){
           }
 
           this.$avatarInput.val('');
-          this.alert(1,data.msg);
-        } else if (data.msg) {
-          this.alert(2,data.msg);
+          this.alert(1,data.message);
+        } else if (data.message) {
+          this.alert(2,data.message);
         }
       } else {
         this.alert(2,'Failed to response');

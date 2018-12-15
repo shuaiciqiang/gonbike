@@ -12,7 +12,7 @@ import org.quartz.SchedulerException;
  * 
  * @author Shuaige
  * @email 77509028@qq.com
- * @date 2018-09-26 20:53:48
+ * @date 2018-12-12 20:53:48
  */
 public interface JobService {
 	

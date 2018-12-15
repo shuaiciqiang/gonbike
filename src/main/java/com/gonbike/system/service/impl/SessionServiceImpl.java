@@ -18,9 +18,7 @@ import java.util.List;
 
 /**
  * 待完善
- *
- * @author bootdo
- */
+ **/
 @Service
 public class SessionServiceImpl implements SessionService {
     private final SessionDAO sessionDAO;

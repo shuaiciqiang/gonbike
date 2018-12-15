@@ -1,18 +1,45 @@
 package com.gonbike.system.domain;
 
+import com.gonbike.common.utils.HelpUtil;
+
 import java.io.Serializable;
 
 /**
- * @author bootdo 77509028@qq.com
- * @version V1.0
+ * @author Shuaige 77509028@qq.com
  */
 public class UserToken implements Serializable {
     private static final long serialVersionUID = 1L;
+    private Long id;
     private Long userId;
-    private String username;
-    private String name;
-    private String password;
-    private Long deptId;
+    private String token;
+
+
+    private String createTime;
+    private String expireTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(String expireTime) {
+        this.expireTime = expireTime;
+    }
 
     public Long getUserId() {
         return userId;
@@ -22,35 +49,14 @@ public class UserToken implements Serializable {
         this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getCreateTime() {
+        if (createTime==null){
+            return HelpUtil.getDateTime();
+        }
+        return createTime;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }

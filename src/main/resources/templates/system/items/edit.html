@@ -11,71 +11,59 @@
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="id" name="id" th:value="${items.id}"  type="hidden">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">商品标题：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-2 control-label">商品标题：</label>
+								<div class="col-sm-4">
 									<input id="title" name="title" th:value="${items.title}" class="form-control" type="text">
 								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">供应商名称：</label>
-								<div class="col-sm-8">
+
+								<label class="col-sm-2 control-label">供应商名称：</label>
+								<div class="col-sm-4">
 									<input id="supId" name="supId" th:value="${items.supId}" class="form-control" type="hidden">
 
 									<input id="supName" name="supName" th:value="${items.supName}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品卖点：</label>
-								<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品卖点：</label>
+								<div class="col-sm-4">
 									<input id="sellPoint" name="sellPoint" th:value="${items.sellPoint}" class="form-control" type="text">
 								</div>
-							</div>
 
-							<div class="form-group">
-								<label class="col-sm-3 control-label">商品积分：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-2 control-label">商品积分：</label>
+								<div class="col-sm-4">
 									<input id="integral" name="integral" th:value="${items.integral}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品价格RMB分：</label>
-								<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品价格RMB分：</label>
+								<div class="col-sm-4">
 									<input id="price" name="price" th:value="${items.price}" class="form-control" type="text">
 								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">库存数量：</label>
-								<div class="col-sm-8">
+
+								<label class="col-sm-2 control-label">库存数量：</label>
+								<div class="col-sm-4">
 									<input id="num" name="num" th:value="${items.num}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">售卖数量限制：</label>
-								<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">售卖数量限制：</label>
+								<div class="col-sm-4">
 									<input id="limitNum" name="limitNum" th:value="${items.limitNum}" class="form-control" type="text">
 								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品图片主图：</label>
-								<div class="col-sm-8">
+
+								<label class="col-sm-2 control-label">商品图片主图：</label>
+								<div class="col-sm-4">
 									<input id="image" name="image" th:value="${items.image}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">所属类目，叶子类目：</label>
-								<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">所属类目，叶子类目：</label>
+								<div class="col-sm-4">
 									<input id="cid" name="cid" th:value="${items.cid}" class="form-control" type="text">
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">商品标签：</label>
-								<div class="col-sm-8" id="shopItemLabelList">
 
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">商品状态，1-正常，2-下架，3-删除：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-2 control-label">商品状态，1-正常，2-下架，3-删除：</label>
+								<div class="col-sm-4">
 									<input id="shopItemLabels" name="itemLabels" type="hidden"/>
 
 									<input id="verId" name="verId" th:value="${items.verId}" class="form-control" type="hidden">
@@ -83,15 +71,25 @@
 									<input id="status" name="status" th:value="${items.status}" class="form-control" type="text">
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品标签：</label>
+								<div class="col-sm-9" id="shopItemLabelList">
 
-
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">已字节的形式保存富文本内容：</label>
-								<div class="col-sm-8">
-									<input id="textByte" name="textByte" th:value="${items.textByte}" class="form-control" type="text">
 								</div>
 							</div>
-																					<div class="form-group">
+
+
+
+							<div class="form-group">
+								<input id="textByteStr" name="textByteStr" th:value="${items.textByteStr}" class="form-control" type="hidden">
+								<label class="col-sm-2 control-label">内容：</label>
+								<div class="col-sm-10">
+									<div class="ibox-content no-padding">
+										<div id="content_sn" class="summernote"></div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>
 								</div>

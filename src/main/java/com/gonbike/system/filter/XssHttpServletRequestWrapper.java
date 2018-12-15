@@ -7,10 +7,7 @@ import com.gonbike.common.utils.xss.JsoupUtil;
 import org.apache.commons.lang3.StringUtils;
 
 
-/** 
- * <code>{@link XssHttpServletRequestWrapper}</code>
- * @author win7
- */  
+
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {  
     HttpServletRequest orgRequest = null;  
     private boolean isIncludeRichText = false;

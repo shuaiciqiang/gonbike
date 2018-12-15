@@ -9,7 +9,7 @@
 
 	<select id="list" resultType="com.gonbike.system.domain.UserDO">
 		select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype   from sys_user
-        <where>
+        where 1=1
 			<if test="fromType != null and fromType != ''"> and fromType = #{fromType} </if>
 
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
@@ -31,7 +31,7 @@
 		  		  <if test="province != null and province != ''"> and province = #{province} </if>
 		  		  <if test="city != null and city != ''"> and city = #{city} </if>
 		  		  <if test="district != null and district != ''"> and district = #{district} </if>
-		  		</where>
+
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -219,4 +219,35 @@
 	<select id="listAllDept" resultType="long">
 				select DISTINCT dept_id from sys_user
 	</select>
+
+	<select id="getUserTokenByTokenId"  resultType="com.gonbike.system.domain.UserToken" parameterType="java.lang.String">
+			select id,userId,token,expireTime,createTime
+			from sys_User_Tokens
+			where token=#{token}
+	</select>
+	<select id="getUserForLogin"  resultType="com.gonbike.system.domain.UserDO" parameterType="com.gonbike.system.domain.UserDO">
+	  	select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype
+		from sys_user
+		where username=#{username} AND password=#{password}
+	</select>
+
+	<select id="countUserTokenByUserId" resultType="java.lang.Integer" parameterType="java.lang.String">
+
+		select count(1) from sys_User_Tokens where id=#{userId}
+	</select>
+	<insert id="insertUserToken" parameterType="com.gonbike.system.domain.UserToken">
+		insert into sys_User_Tokens
+		(id,userId,createTime,expireTime,token)
+		VALUES
+		(
+			#{id},#{userId},#{createTime},#{expireTime},#{token}
+
+		)
+
+	</insert>
+	<insert id="updateUserToken" parameterType="com.gonbike.system.domain.UserToken">
+		update sys_User_Tokens set token=#{token},createTime=#{createTime},expireTime=#{expireTime}
+		where id=#{userId}
+
+	</insert>
 </mapper>

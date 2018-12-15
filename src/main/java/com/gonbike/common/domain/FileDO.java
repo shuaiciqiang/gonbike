@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * @author Shuaige
  * @email 77509028@qq.com
- * @date 2018-09-19 16:02:20
+ * @date 2018-12-12 16:02:20
  */
 public class FileDO implements Serializable {
     private static final long serialVersionUID = 1L;

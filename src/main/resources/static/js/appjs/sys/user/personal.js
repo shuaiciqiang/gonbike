@@ -43,11 +43,11 @@ $("#pwd_save").click(function () {
                 parent.laryer.alert("Connection error");
             },
             success : function(data) {
-                if (data.code == 0) {
+                if (data.statusCode == 0) {
                     parent.layer.alert("更新密码成功");
                     $("#photo_info").click();
                 } else {
-                    parent.layer.alert(data.msg)
+                    parent.layer.alert(data.message)
                 }
             }
         });

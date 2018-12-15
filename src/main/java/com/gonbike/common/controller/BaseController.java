@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import com.gonbike.common.utils.ShiroUtils;
 import com.gonbike.system.domain.UserDO;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -24,4 +25,5 @@ public class BaseController {
 	public String getUserName() {
 		return getUser().getUsername();
 	}
+
 }

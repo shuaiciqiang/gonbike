@@ -2,12 +2,14 @@ package com.gonbike.system.service.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.gonbike.common.config.GonbikeConfig;
 import com.gonbike.common.domain.FileDO;
 import com.gonbike.common.service.FileService;
 import com.gonbike.common.utils.*;
+import com.gonbike.system.domain.UserToken;
 import com.gonbike.system.vo.UserVO;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
@@ -43,9 +45,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private FileService sysFileService;
     @Autowired
-    private GonbikeConfig bootdoConfig;
+    private GonbikeConfig gonbikeConfig;
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-
+    //12小时后过期
+    private final static int EXPIRE = 3600 * 12;
     @Override
 //    @Cacheable(value = "user",key = "#id")
     public UserDO get(Long id) {
@@ -55,7 +58,22 @@ public class UserServiceImpl implements UserService {
         user.setRoleIds(roleIds);
         return user;
     }
+    @Override
+    public void saveUserToken(UserToken userToken){
+        //当前时间
+        Date now = new Date();
+        //过期时间
+        Date expireTime = new Date(now.getTime() + EXPIRE * 1000);
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        userToken.setExpireTime(sDateFormat.format(expireTime));
 
+        int vCount=userMapper.countUserTokenByUserId(userToken.getUserId().toString());
+        if (vCount==0) {
+            userMapper.insertUserToken(userToken);
+        }else{
+            userMapper.updateUserToken(userToken);
+        }
+    }
     @Override
     public List<UserDO> list(Map<String, Object> map) {
         return userMapper.list(map);
@@ -71,6 +89,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int countByUser(UserDO user) {
         return userMapper.countByUser(user);
+    }
+
+    public UserToken getUserTokenByTokenId(String tokenId){
+        return userMapper.getUserTokenByTokenId(tokenId);
     }
     @Transactional
     @Override
@@ -206,7 +228,10 @@ public class UserServiceImpl implements UserService {
     public int updatePersonal(UserDO userDO) {
         return userMapper.update(userDO);
     }
-
+    @Override
+    public  UserDO getUserForLogin(UserDO user){
+        return userMapper.getUserForLogin(user);
+    }
     @Override
     public Map<String, Object> updatePersonalImg(MultipartFile file, String avatar_data, Long userId) throws Exception {
         String fileName = file.getOriginalFilename();
@@ -232,7 +257,7 @@ public class UserServiceImpl implements UserService {
             boolean flag = ImageIO.write(rotateImage, prefix, out);
             //转换后存入数据库
             byte[] b = out.toByteArray();
-            FileUtil.uploadFile(b, bootdoConfig.getUploadPath(), fileName);
+            FileUtil.uploadFile(b, gonbikeConfig.getUploadPath(), fileName);
         } catch (Exception e) {
             throw new Exception("图片裁剪错误！！");
         }

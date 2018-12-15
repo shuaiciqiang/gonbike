@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.Map;
  * 
  * @author Shuaige
  * @email 77509028@qq.com
- * @date 2018-09-19 16:02:20
+ * @date 2018-12-12 16:02:20
  */
 @Controller
 @RequestMapping("/common/sysFile")
@@ -32,7 +33,7 @@ public class FileController extends BaseController {
 	private FileService sysFileService;
 
 	@Autowired
-	private GonbikeConfig bootdoConfig;
+	private GonbikeConfig gonbikeConfig;
 
 	@GetMapping()
 	@RequiresPermissions("common:sysFile:sysFile")
@@ -109,7 +110,7 @@ public class FileController extends BaseController {
 	// @RequiresPermissions("common:remove")
 	public R remove(Long id, HttpServletRequest request) {
 
-		String fileName = bootdoConfig.getUploadPath() + sysFileService.get(id).getUrl().replace("/files/", "");
+		String fileName = gonbikeConfig.getUploadPath() + sysFileService.get(id).getUrl().replace("/files/", "");
 		if (sysFileService.remove(id) > 0) {
 			boolean b = FileUtil.deleteFile(fileName);
 			if (!b) {
@@ -138,10 +139,15 @@ public class FileController extends BaseController {
 	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 
 		String fileName = file.getOriginalFilename();
-		fileName = FileUtil.renameToUUID(fileName);
+		fileName =HelpUtil.getYear()+"/"+HelpUtil.getShortDate()+"/"+ FileUtil.renameToUUID(fileName);
+		File vFileDir=new File(gonbikeConfig.getUploadPath()+HelpUtil.getYear()+"/"+HelpUtil.getShortDate());
+		if (!vFileDir.exists()){
+			vFileDir.mkdirs();
+		}
+
 		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
 		try {
-			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+			FileUtil.uploadFile(file.getBytes(), gonbikeConfig.getUploadPath(), fileName);
 		} catch (Exception e) {
 			return R.error();
 		}

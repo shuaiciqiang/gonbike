@@ -5,6 +5,7 @@ import com.gonbike.common.config.Constant;
 import com.gonbike.common.redis.shiro.RedisCacheManager;
 import com.gonbike.common.redis.shiro.RedisManager;
 import com.gonbike.common.redis.shiro.RedisSessionDAO;
+import com.gonbike.system.filter.OAuth2Filter;
 import com.gonbike.system.shiro.UserRealm;
 //import org.apache.shiro.cache.CacheManager;
 import net.sf.ehcache.CacheManager;
@@ -26,12 +27,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
+import javax.servlet.Filter;
+import java.util.*;
 
 /**
- * @author bootdo 77509028@qq.com
+ * @author 77509028@qq.com
  */
 @Configuration
 public class ShiroConfig {
@@ -72,8 +72,16 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        Map<String, Filter> filters = new HashMap<>();
+        filters.put("oauth2", new OAuth2Filter());
+        shiroFilterFactoryBean.setFilters(filters);
+
+
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/login","anon");
+        filterChainDefinitionMap.put("/swagger/**","anon");
+        filterChainDefinitionMap.put("/pub/**", "anon");//前端商城访问，带api字样的是要前台登录的
+        filterChainDefinitionMap.put("/**/pub/**", "anon");//前端商城访问，带api字样的是要前台登录的
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -87,7 +95,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/blog", "anon");
         filterChainDefinitionMap.put("/blog/open/**", "anon");
         filterChainDefinitionMap.put("/v2/api-docs", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "oauth2");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -97,7 +105,7 @@ public class ShiroConfig {
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //设置realm.
-        securityManager.setRealm(userRealm());
+        securityManager.setRealm(new UserRealm());
         // 自定义缓存实现 使用redis
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
             securityManager.setCacheManager(rediscacheManager());
@@ -108,11 +116,11 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    @Bean
-    UserRealm userRealm() {
-        UserRealm userRealm = new UserRealm();
-        return userRealm;
-    }
+  //  @Bean
+   // UserRealm userRealm() {
+    //    UserRealm userRealm = new UserRealm();
+    //    return userRealm;
+   // }
 
     /**
      * 开启shiro aop注解支持.
