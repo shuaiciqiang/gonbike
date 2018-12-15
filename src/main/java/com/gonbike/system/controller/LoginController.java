@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,8 +53,28 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@GetMapping({ "/", "" })
-	String welcome(Model model) {
-
+	String welcome(Model model, HttpServletResponse response) {
+		request.getSession(true);
+		/*
+		String token=null;
+		String JSESSIONID=null;
+		for (Cookie cookie : request.getCookies()) {
+			if (cookie.getName().toString().equals("JSESSIONID")){
+				token=cookie.getValue().toUpperCase().replace("-","");
+			}
+		}
+		if (token==null){
+			JSESSIONID=HelpUtil.getGUID();
+		}else{
+			JSESSIONID=token;
+		}
+		if (JSESSIONID!=null) {
+			Cookie imgCodeCookie = new Cookie("JSESSIONID", JSESSIONID);
+			imgCodeCookie.setPath("/");
+			imgCodeCookie.setMaxAge(72000);
+			response.addCookie(imgCodeCookie);
+		}
+		*/
 		return "redirect:/login";
 	}
 
