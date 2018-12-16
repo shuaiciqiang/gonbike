@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gonbike.shop.dao.AddressDao">
+
+	<select id="get" resultType="com.gonbike.shop.domain.AddressDO">
+		select  addressId as addressId , userId as userId , userName as userName , tel as tel , stateId as stateId , state as state , cityId as cityId , city as city , districtId as districtId , district as district , street_name as streetName , zip as zip , isDefault as isDefault , receName as receName , receTel as receTel  from shop_address where addressId = #{value}
+	</select>
+
+	<select id="list" resultType="com.gonbike.shop.domain.AddressDO">
+		select  addressId as addressId , userId as userId , userName as userName , tel as tel , stateId as stateId , state as state , cityId as cityId , city as city , districtId as districtId , district as district , street_name as streetName , zip as zip , isDefault as isDefault , receName as receName , receTel as receTel  from shop_address
+        where 1=1
+		  		  <if test="addressId != null and addressId != ''"> and addressId = #{addressId} </if>
+		  		  <if test="userId != null and userId != ''"> and userId = #{userId} </if>
+		  		  <if test="userName != null and userName != ''"> and userName = #{userName} </if>
+		  		  <if test="tel != null and tel != ''"> and tel = #{tel} </if>
+		  		  <if test="stateId != null and stateId != ''"> and stateId = #{stateId} </if>
+		  		  <if test="state != null and state != ''"> and state = #{state} </if>
+		  		  <if test="cityId != null and cityId != ''"> and cityId = #{cityId} </if>
+		  		  <if test="city != null and city != ''"> and city = #{city} </if>
+		  		  <if test="districtId != null and districtId != ''"> and districtId = #{districtId} </if>
+		  		  <if test="district != null and district != ''"> and district = #{district} </if>
+		  		  <if test="streetName != null and streetName != ''"> and street_name = #{streetName} </if>
+		  		  <if test="zip != null and zip != ''"> and zip = #{zip} </if>
+		  		  <if test="isDefault != null and isDefault != ''"> and isDefault = #{isDefault} </if>
+		  		  <if test="receName != null and receName != ''"> and receName = #{receName} </if>
+		  		  <if test="receTel != null and receTel != ''"> and receTel = #{receTel} </if>
+		  
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by addressId desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(1) from shop_address
+		 where 1=1
+		  		  <if test="addressId != null and addressId != ''"> and addressId = #{addressId} </if>
+		  		  <if test="userId != null and userId != ''"> and userId = #{userId} </if>
+		  		  <if test="userName != null and userName != ''"> and userName = #{userName} </if>
+		  		  <if test="tel != null and tel != ''"> and tel = #{tel} </if>
+		  		  <if test="stateId != null and stateId != ''"> and stateId = #{stateId} </if>
+		  		  <if test="state != null and state != ''"> and state = #{state} </if>
+		  		  <if test="cityId != null and cityId != ''"> and cityId = #{cityId} </if>
+		  		  <if test="city != null and city != ''"> and city = #{city} </if>
+		  		  <if test="districtId != null and districtId != ''"> and districtId = #{districtId} </if>
+		  		  <if test="district != null and district != ''"> and district = #{district} </if>
+		  		  <if test="streetName != null and streetName != ''"> and street_name = #{streetName} </if>
+		  		  <if test="zip != null and zip != ''"> and zip = #{zip} </if>
+		  		  <if test="isDefault != null and isDefault != ''"> and isDefault = #{isDefault} </if>
+		  		  <if test="receName != null and receName != ''"> and receName = #{receName} </if>
+		  		  <if test="receTel != null and receTel != ''"> and receTel = #{receTel} </if>
+		  
+	</select>
+	 
+	<insert id="save" parameterType="com.gonbike.shop.domain.AddressDO" useGeneratedKeys="true" keyProperty="addressId">
+		insert into shop_address
+		(
+			`userId`, 
+			`userName`, 
+			`tel`, 
+			`stateId`, 
+			`state`, 
+			`cityId`, 
+			`city`, 
+			`districtId`, 
+			`district`, 
+			`street_name`, 
+			`zip`, 
+			`isDefault`, 
+			`receName`, 
+			`receTel`
+		)
+		values
+		(
+			#{userId}, 
+			#{userName}, 
+			#{tel}, 
+			#{stateId}, 
+			#{state}, 
+			#{cityId}, 
+			#{city}, 
+			#{districtId}, 
+			#{district}, 
+			#{streetName}, 
+			#{zip}, 
+			#{isDefault}, 
+			#{receName}, 
+			#{receTel}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.gonbike.shop.domain.AddressDO">
+		update shop_address 
+		<set>
+			<if test="userId != null">userId = #{userId}, </if>
+			<if test="userName != null">userName = #{userName}, </if>
+			<if test="tel != null">tel = #{tel}, </if>
+			<if test="stateId != null">stateId = #{stateId}, </if>
+			<if test="state != null">state = #{state}, </if>
+			<if test="cityId != null">cityId = #{cityId}, </if>
+			<if test="city != null">city = #{city}, </if>
+			<if test="districtId != null">districtId = #{districtId}, </if>
+			<if test="district != null">district = #{district}, </if>
+			<if test="streetName != null">street_name = #{streetName}, </if>
+			<if test="zip != null">zip = #{zip}, </if>
+			<if test="isDefault != null">isDefault = #{isDefault}, </if>
+			<if test="receName != null">receName = #{receName}, </if>
+			<if test="receTel != null">receTel = #{receTel}</if>
+		</set>
+		where addressId = #{addressId}
+	</update>
+	
+	<delete id="remove">
+		delete from shop_address where addressId = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from shop_address where addressId in 
+		<foreach item="addressId" collection="array" open="(" separator="," close=")">
+			#{addressId}
+		</foreach>
+	</delete>
+
+</mapper>

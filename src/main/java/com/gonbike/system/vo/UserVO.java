@@ -3,8 +3,8 @@ package com.gonbike.system.vo;
 import com.gonbike.system.domain.UserDO;
 
 /**
- * @author gaoyuzhe
- * @date 2017/12/15.
+ * @author Shuaige
+ * @date 2018/12/15.
  */
 public class UserVO {
     /**

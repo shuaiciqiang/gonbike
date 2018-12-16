@@ -1,5 +1,5 @@
 
-var prefix = "/${pathName}/${classname}"
+var prefix = "/shop/address"
 $(function() {
 	load();
 });
@@ -47,25 +47,79 @@ function load() {
 								{
 									checkbox : true
 								},
-								#foreach($column in $columns)
-								{
-									field : '${column.attrname}', 
-									title : '${column.comments}' 
+																{
+									field : 'addressId',
+									title : '' 
 								},
-								#end
-								{
+																{
+									field : 'userId',
+									title : '用户id' 
+								},
+																{
+									field : 'userName',
+									title : '用户名' 
+								},
+																{
+									field : 'tel', 
+									title : '电话' 
+								},
+																{
+									field : 'stateId',
+									title : '省份id' 
+								},
+																{
+									field : 'state', 
+									title : '省份' 
+								},
+																{
+									field : 'cityId',
+									title : '城市id' 
+								},
+																{
+									field : 'city', 
+									title : '城市' 
+								},
+																{
+									field : 'districtId',
+									title : '区域id' 
+								},
+																{
+									field : 'district', 
+									title : '地区' 
+								},
+																{
+									field : 'streetName', 
+									title : '详细地址' 
+								},
+																{
+									field : 'zip', 
+									title : '邮编' 
+								},
+																{
+									field : 'isDefault',
+									title : '是否设置为默认地址(0为默认)' 
+								},
+																{
+									field : 'receName',
+									title : '接收人姓名' 
+								},
+																{
+									field : 'receTel',
+									title : '接收人电话' 
+								},
+																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.${pk.attrname}
+												+ row.addressId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.${pk.attrname}
+												+ row.addressId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.${pk.attrname}
+												+ row.addressId
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -103,7 +157,7 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'${pk.attrname}' : id
+				'addressId' : id
 			},
 			success : function(r) {
 				if (r.statusCode==200) {
@@ -132,7 +186,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['${pk.attrname}'];
+			ids[i] = row['addressId'];
 		});
 		$.ajax({
 			type : 'POST',

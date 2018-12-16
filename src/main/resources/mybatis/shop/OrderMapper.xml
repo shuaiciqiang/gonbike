@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gonbike.shop.dao.OrderDao">
+
+	<select id="get" resultType="com.gonbike.shop.domain.OrderDO">
+		select  orderId as orderId , payment as payment , paymentType as paymentType , postFee as postFee , status as status , createTime as createTime , updatetime as updateTime , paymenttime as paymentTime , consigntime as consignTime , endtime as endTime , closetime as closeTime , shippingname as shippingName , shippingcode as shippingCode , userid as userId , buyermessage as buyerMessage , buyernick as buyerNick , buyerrate as buyerRate , isPay as ispay , isDelete as isdelete , isBack as isback  from shop_order where orderid = #{value}
+	</select>
+
+	<select id="list" resultType="com.gonbike.shop.domain.OrderDO">
+		select  orderid as orderId , payment as payment , paymenttype as paymentType , postfee as postFee , status as status , createtime as createTime , updatetime as updateTime , paymenttime as paymentTime , consigntime as consignTime , endtime as endTime , closetime as closeTime , shippingname as shippingName , shippingcode as shippingCode , userid as userId , buyermessage as buyerMessage , buyernick as buyerNick , buyerrate as buyerRate , isPay as ispay , isDelete as isdelete , isBack as isback  from shop_order
+        where 1=1
+		  		  <if test="orderId != null and orderId != ''"> and orderid = #{orderId} </if>
+		  		  <if test="payment != null and payment != ''"> and payment = #{payment} </if>
+		  		  <if test="paymentType != null and paymentType != ''"> and paymenttype = #{paymentType} </if>
+		  		  <if test="postFee != null and postFee != ''"> and postfee = #{postFee} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and createtime = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and updatetime = #{updateTime} </if>
+		  		  <if test="paymentTime != null and paymentTime != ''"> and paymenttime = #{paymentTime} </if>
+		  		  <if test="consignTime != null and consignTime != ''"> and consigntime = #{consignTime} </if>
+		  		  <if test="endTime != null and endTime != ''"> and endtime = #{endTime} </if>
+		  		  <if test="closeTime != null and closeTime != ''"> and closetime = #{closeTime} </if>
+		  		  <if test="shippingName != null and shippingName != ''"> and shippingname = #{shippingName} </if>
+		  		  <if test="shippingCode != null and shippingCode != ''"> and shippingcode = #{shippingCode} </if>
+		  		  <if test="userId != null and userId != ''"> and userid = #{userId} </if>
+		  		  <if test="buyerMessage != null and buyerMessage != ''"> and buyermessage = #{buyerMessage} </if>
+		  		  <if test="buyerNick != null and buyerNick != ''"> and buyernick = #{buyerNick} </if>
+		  		  <if test="buyerRate != null and buyerRate != ''"> and buyerrate = #{buyerRate} </if>
+		  		  <if test="ispay != null and ispay != ''"> and isPay = #{ispay} </if>
+		  		  <if test="isdelete != null and isdelete != ''"> and isDelete = #{isdelete} </if>
+		  		  <if test="isback != null and isback != ''"> and isBack = #{isback} </if>
+		  
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by orderid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(1) from shop_order
+		 where 1=1
+		  		  <if test="orderId != null and orderId != ''"> and orderid = #{orderId} </if>
+		  		  <if test="payment != null and payment != ''"> and payment = #{payment} </if>
+		  		  <if test="paymentType != null and paymentType != ''"> and paymenttype = #{paymentType} </if>
+		  		  <if test="postFee != null and postFee != ''"> and postfee = #{postFee} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and createtime = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and updatetime = #{updateTime} </if>
+		  		  <if test="paymentTime != null and paymentTime != ''"> and paymenttime = #{paymentTime} </if>
+		  		  <if test="consignTime != null and consignTime != ''"> and consigntime = #{consignTime} </if>
+		  		  <if test="endTime != null and endTime != ''"> and endtime = #{endTime} </if>
+		  		  <if test="closeTime != null and closeTime != ''"> and closetime = #{closeTime} </if>
+		  		  <if test="shippingName != null and shippingName != ''"> and shippingname = #{shippingName} </if>
+		  		  <if test="shippingCode != null and shippingCode != ''"> and shippingcode = #{shippingCode} </if>
+		  		  <if test="userId != null and userId != ''"> and userid = #{userId} </if>
+		  		  <if test="buyerMessage != null and buyerMessage != ''"> and buyermessage = #{buyerMessage} </if>
+		  		  <if test="buyerNick != null and buyerNick != ''"> and buyernick = #{buyerNick} </if>
+		  		  <if test="buyerRate != null and buyerRate != ''"> and buyerrate = #{buyerRate} </if>
+		  		  <if test="ispay != null and ispay != ''"> and isPay = #{ispay} </if>
+		  		  <if test="isdelete != null and isdelete != ''"> and isDelete = #{isdelete} </if>
+		  		  <if test="isback != null and isback != ''"> and isBack = #{isback} </if>
+		  
+	</select>
+	 
+	<insert id="save" parameterType="com.gonbike.shop.domain.OrderDO">
+		insert into shop_order
+		(
+			`orderid`,
+			`payment`, 
+			`paymenttype`,
+			`postfee`,
+			`status`, 
+			`createtime`,
+			`updatetime`,
+			`paymenttime`,
+			`consigntime`,
+			`endtime`,
+			`closetime`,
+			`shippingname`,
+			`shippingcode`,
+			`userid`,
+			`buyermessage`,
+			`buyernick`,
+			`buyerrate`,
+			`isPay`, 
+			`isDelete`, 
+			`isBack`
+		)
+		values
+		(
+			#{orderId}, 
+			#{payment}, 
+			#{paymentType}, 
+			#{postFee}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}, 
+			#{paymentTime}, 
+			#{consignTime}, 
+			#{endTime}, 
+			#{closeTime}, 
+			#{shippingName}, 
+			#{shippingCode}, 
+			#{userId}, 
+			#{buyerMessage}, 
+			#{buyerNick}, 
+			#{buyerRate}, 
+			#{ispay}, 
+			#{isdelete}, 
+			#{isback}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.gonbike.shop.domain.OrderDO">
+		update shop_order 
+		<set>
+			<if test="payment != null">payment = #{payment}, </if>
+			<if test="paymentType != null">paymenttype = #{paymentType}, </if>
+			<if test="postFee != null">postfee = #{postFee}, </if>
+			<if test="status != null">status = #{status}, </if>
+			<if test="createTime != null">createtime = #{createTime}, </if>
+			<if test="updateTime != null">updatetime = #{updateTime}, </if>
+			<if test="paymentTime != null">paymenttime = #{paymentTime}, </if>
+			<if test="consignTime != null">consigntime = #{consignTime}, </if>
+			<if test="endTime != null">endtime = #{endTime}, </if>
+			<if test="closeTime != null">closetime = #{closeTime}, </if>
+			<if test="shippingName != null">shippingname = #{shippingName}, </if>
+			<if test="shippingCode != null">shippingcode = #{shippingCode}, </if>
+			<if test="userId != null">userid = #{userId}, </if>
+			<if test="buyerMessage != null">buyermessage = #{buyerMessage}, </if>
+			<if test="buyerNick != null">buyernick = #{buyerNick}, </if>
+			<if test="buyerRate != null">buyerrate = #{buyerRate}, </if>
+			<if test="ispay != null">isPay = #{ispay}, </if>
+			<if test="isdelete != null">isDelete = #{isdelete}, </if>
+			<if test="isback != null">isBack = #{isback}</if>
+		</set>
+		where orderid = #{orderId}
+	</update>
+	
+	<delete id="remove">
+		delete from shop_order where orderid = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from shop_order where orderid in
+		<foreach item="orderId" collection="array" open="(" separator="," close=")">
+			#{orderId}
+		</foreach>
+	</delete>
+
+</mapper>

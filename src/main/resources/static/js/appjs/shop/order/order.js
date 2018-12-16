@@ -1,5 +1,5 @@
 
-var prefix = "/${pathName}/${classname}"
+var prefix = "/shop/order"
 $(function() {
 	load();
 });
@@ -47,25 +47,99 @@ function load() {
 								{
 									checkbox : true
 								},
-								#foreach($column in $columns)
-								{
-									field : '${column.attrname}', 
-									title : '${column.comments}' 
+																{
+									field : 'orderId', 
+									title : '订单id' 
 								},
-								#end
-								{
+																{
+									field : 'payment', 
+									title : '实付金额。精确到2位小数;单位:元。如:200.07，表示:200元7分' 
+								},
+																{
+									field : 'paymentType', 
+									title : '支付类型，0、在线支付，1、货到付款' 
+								},
+																{
+									field : 'postFee', 
+									title : '邮费。精确到2位小数;单位:元。如:200.07，表示:200元7分' 
+								},
+																{
+									field : 'status', 
+									title : '状态：1、待发货 2、已发货  3、待收货 4、已收货' 
+								},
+																{
+									field : 'createTime', 
+									title : '订单创建时间' 
+								},
+																{
+									field : 'updateTime', 
+									title : '订单更新时间' 
+								},
+																{
+									field : 'paymentTime', 
+									title : '付款时间' 
+								},
+																{
+									field : 'consignTime', 
+									title : '发货时间' 
+								},
+																{
+									field : 'endTime', 
+									title : '交易完成时间' 
+								},
+																{
+									field : 'closeTime', 
+									title : '交易关闭时间' 
+								},
+																{
+									field : 'shippingName', 
+									title : '物流名称' 
+								},
+																{
+									field : 'shippingCode', 
+									title : '物流单号' 
+								},
+																{
+									field : 'userId', 
+									title : '用户id' 
+								},
+																{
+									field : 'buyerMessage', 
+									title : '买家留言' 
+								},
+																{
+									field : 'buyerNick', 
+									title : '买家昵称' 
+								},
+																{
+									field : 'buyerRate', 
+									title : '0、待评价 1、已评价' 
+								},
+																{
+									field : 'ispay', 
+									title : '0、待付款 1、已付款 ' 
+								},
+																{
+									field : 'isdelete', 
+									title : '是否为有效订单（0、有效 1、无效--删除订单，--取消订单）' 
+								},
+																{
+									field : 'isback', 
+									title : '是否存在退款（0、不存在，1、存在）' 
+								},
+																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.${pk.attrname}
+												+ row.orderId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.${pk.attrname}
+												+ row.orderId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.${pk.attrname}
+												+ row.orderId
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -103,14 +177,14 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'${pk.attrname}' : id
+				'orderId' : id
 			},
 			success : function(r) {
-				if (r.statusCode==200) {
-					layer.msg(r.message);
+				if (r.code==0) {
+					layer.msg(r.msg);
 					reLoad();
 				}else{
-					layer.msg(r.message);
+					layer.msg(r.msg);
 				}
 			}
 		});
@@ -132,7 +206,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['${pk.attrname}'];
+			ids[i] = row['orderId'];
 		});
 		$.ajax({
 			type : 'POST',
@@ -141,7 +215,7 @@ function batchRemove() {
 			},
 			url : prefix + '/batchRemove',
 			success : function(r) {
-				if (r.statusCode == 200) {
+				if (r.statusCode == 0) {
 					layer.msg(r.message);
 					reLoad();
 				} else {
