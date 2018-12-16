@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.gonbike.common.controller.BaseController;
+import com.gonbike.common.utils.HelpUtil;
+import com.gonbike.system.domain.UserToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -126,8 +128,19 @@ public class MemberController extends BaseController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		UserDO user =new UserDO();
 		user.setFromType(0);
-		user.setUserId(1l);
-		user.setUsername("帅词强");
+		user.setUserId(124l);
+		user.setUsername("吴亦凡");
+		String token= HelpUtil.getGUID();
+
+		UserToken userToken=new UserToken();
+		userToken.setUserId(user.getUserId());
+		userToken.setId(user.getUserId());
+		userToken.setToken(token);
+		userToken.setCreateTime(HelpUtil.getDateTime());
+
+		userService.saveUserToken(userToken);
+
+		map.put("token",token);
 		map.put("user",user);
 		return R.ok(map);
 	}
@@ -140,7 +153,7 @@ public class MemberController extends BaseController {
 		UserDO user =new UserDO();
 		user.setFromType(0);
 		user.setUserId(Long.valueOf(userId));
-		user.setUsername("帅词强");
+		user=userService.getUserByUserId(user);
 		map.put("user",user);
 		return R.ok(map);
 	}

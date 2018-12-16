@@ -19,6 +19,7 @@ public interface UserDao {
 
 	UserDO get(Long userId);
 	UserDO getUserForLogin(UserDO user);
+	UserDO getUserByUserId(UserDO user);
 	void insertUserToken(UserToken userToken);
 	void updateUserToken(UserToken userToken);
 	int countUserTokenByUserId(String userId);

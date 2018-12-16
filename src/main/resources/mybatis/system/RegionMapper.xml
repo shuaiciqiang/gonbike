@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gonbike.base.dao.RegionDao">
+
+	<select id="get" resultType="com.gonbike.base.domain.RegionDO">
+		select  id as id , name as name , parentId as parentid , shortName as shortname , shortCode as shortcode , levelType as leveltype , cityCode as citycode , zipCode as zipcode , mergerName as mergername , eastLongitude as eastlongitude , northLatitude as northlatitude , position as position , memoCode as memocode , status as status  from sys_region where id = #{value}
+	</select>
+	<select id="getlistByParentId" resultType="com.gonbike.base.domain.RegionDO" parameterType="java.lang.String">
+		select  id as id , name as name , parentId as parentid , shortName as shortname , shortCode as shortcode , levelType as leveltype , cityCode as citycode , zipCode as zipcode , mergerName as mergername , eastLongitude as eastlongitude , northLatitude as northlatitude , position as position , memoCode as memocode , status as status
+		from sys_region where parentId = #{value} and IFNULL(status,0)=0
+		order by shortName
+	</select>
+	<select id="list" resultType="com.gonbike.base.domain.RegionDO">
+		select  id as id , name as name , parentId as parentid , shortName as shortname , shortCode as shortcode , levelType as leveltype , cityCode as citycode , zipCode as zipcode , mergerName as mergername , eastLongitude as eastlongitude , northLatitude as northlatitude , position as position , memoCode as memocode , status as status  from sys_region
+        where 1=1 and IFNULL(status,0)=0
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="parentid != null and parentid != ''"> and parentId = #{parentid} </if>
+		  		  <if test="shortname != null and shortname != ''"> and shortName = #{shortname} </if>
+		  		  <if test="shortcode != null and shortcode != ''"> and shortCode = #{shortcode} </if>
+		  		  <if test="leveltype != null and leveltype != ''"> and levelType = #{leveltype} </if>
+		  		  <if test="citycode != null and citycode != ''"> and cityCode = #{citycode} </if>
+		  		  <if test="zipcode != null and zipcode != ''"> and zipCode = #{zipcode} </if>
+		  		  <if test="mergername != null and mergername != ''"> and mergerName = #{mergername} </if>
+		  		  <if test="eastlongitude != null and eastlongitude != ''"> and eastLongitude = #{eastlongitude} </if>
+		  		  <if test="northlatitude != null and northlatitude != ''"> and northLatitude = #{northlatitude} </if>
+		  		  <if test="position != null and position != ''"> and position = #{position} </if>
+		  		  <if test="memocode != null and memocode != ''"> and memoCode = #{memocode} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(1) from sys_region
+		 where 1=1
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="parentid != null and parentid != ''"> and parentId = #{parentid} </if>
+		  		  <if test="shortname != null and shortname != ''"> and shortName = #{shortname} </if>
+		  		  <if test="shortcode != null and shortcode != ''"> and shortCode = #{shortcode} </if>
+		  		  <if test="leveltype != null and leveltype != ''"> and levelType = #{leveltype} </if>
+		  		  <if test="citycode != null and citycode != ''"> and cityCode = #{citycode} </if>
+		  		  <if test="zipcode != null and zipcode != ''"> and zipCode = #{zipcode} </if>
+		  		  <if test="mergername != null and mergername != ''"> and mergerName = #{mergername} </if>
+		  		  <if test="eastlongitude != null and eastlongitude != ''"> and eastLongitude = #{eastlongitude} </if>
+		  		  <if test="northlatitude != null and northlatitude != ''"> and northLatitude = #{northlatitude} </if>
+		  		  <if test="position != null and position != ''"> and position = #{position} </if>
+		  		  <if test="memocode != null and memocode != ''"> and memoCode = #{memocode} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  
+	</select>
+	 
+	<insert id="save" parameterType="com.gonbike.base.domain.RegionDO">
+		insert into sys_region
+		(
+			`id`, 
+			`name`, 
+			`parentId`, 
+			`shortName`, 
+			`shortCode`, 
+			`levelType`, 
+			`cityCode`, 
+			`zipCode`, 
+			`mergerName`, 
+			`eastLongitude`, 
+			`northLatitude`, 
+			`position`, 
+			`memoCode`, 
+			`status`
+		)
+		values
+		(
+			#{id}, 
+			#{name}, 
+			#{parentid}, 
+			#{shortname}, 
+			#{shortcode}, 
+			#{leveltype}, 
+			#{citycode}, 
+			#{zipcode}, 
+			#{mergername}, 
+			#{eastlongitude}, 
+			#{northlatitude}, 
+			#{position}, 
+			#{memocode}, 
+			#{status}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.gonbike.base.domain.RegionDO">
+		update sys_region 
+		<set>
+			<if test="name != null">name = #{name}, </if>
+			<if test="parentid != null">parentId = #{parentid}, </if>
+			<if test="shortname != null">shortName = #{shortname}, </if>
+			<if test="shortcode != null">shortCode = #{shortcode}, </if>
+			<if test="leveltype != null">levelType = #{leveltype}, </if>
+			<if test="citycode != null">cityCode = #{citycode}, </if>
+			<if test="zipcode != null">zipCode = #{zipcode}, </if>
+			<if test="mergername != null">mergerName = #{mergername}, </if>
+			<if test="eastlongitude != null">eastLongitude = #{eastlongitude}, </if>
+			<if test="northlatitude != null">northLatitude = #{northlatitude}, </if>
+			<if test="position != null">position = #{position}, </if>
+			<if test="memocode != null">memoCode = #{memocode}, </if>
+			<if test="status != null">status = #{status}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from sys_region where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sys_region where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

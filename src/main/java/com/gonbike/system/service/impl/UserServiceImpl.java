@@ -59,6 +59,10 @@ public class UserServiceImpl implements UserService {
         return user;
     }
     @Override
+    public UserDO getUserByUserId(UserDO user){
+        return userMapper.getUserByUserId(user);
+    }
+    @Override
     public void saveUserToken(UserToken userToken){
         //当前时间
         Date now = new Date();

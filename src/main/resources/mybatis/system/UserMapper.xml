@@ -6,7 +6,13 @@
 	<select id="get" resultType="com.gonbike.system.domain.UserDO">
 		select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype  from sys_user where user_id = #{value}
 	</select>
+	<select id="getUserByUserId" resultType="com.gonbike.system.domain.UserDO" parameterType="com.gonbike.system.domain.UserDO">
+		select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype  from sys_user
+		where user_id = #{userId}
+		<if test="fromType != null "> and fromType = #{fromType} </if>
 
+
+	</select>
 	<select id="list" resultType="com.gonbike.system.domain.UserDO">
 		select  user_id as userId , username as username , name as name , password as password , dept_id as deptId , email as email , mobile as mobile , status as status , user_id_create as userIdCreate , gmt_create as gmtCreate , gmt_modified as gmtModified , sex as sex , birth as birth , pic_id as picId , live_address as liveAddress , hobby as hobby , province as province , city as city , district as district , fromType as fromtype   from sys_user
         where 1=1

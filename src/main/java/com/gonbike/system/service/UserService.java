@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface UserService {
 	UserDO get(Long id);
 	UserDO getUserForLogin(UserDO user);
+	UserDO getUserByUserId(UserDO user);
 	void saveUserToken(UserToken userToken);
 	List<UserDO> list(Map<String, Object> map);
 	List<UserDO> listByUser(UserDO user);
