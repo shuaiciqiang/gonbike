@@ -146,7 +146,7 @@ public class MemberController extends BaseController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/api/user/info/{userId}",method= RequestMethod.GET)
+	@RequestMapping(value="/api/info/{userId}",method= RequestMethod.GET)
 	@ApiOperation(value="商城会员个人信息",httpMethod="GET",notes ="userId是个人账号Id")
 	public R getUserInfo(@PathVariable String userId){
 		Map<String,Object> map=new HashMap<String,Object>();
