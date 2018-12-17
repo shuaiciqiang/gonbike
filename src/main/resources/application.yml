@@ -24,8 +24,9 @@ spring:
   devtools:
     restart:
       enabled: true
+#cache的session默认处理方式是echcache缓存，如用session共享时，则启用type是redis
   cache:
-    type: ehcache
+    type: redis
     ehcache:
       config: classpath:config/ehcache.xml
 mybatis:
