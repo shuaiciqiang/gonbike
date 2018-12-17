@@ -128,7 +128,7 @@ public class MemberController extends BaseController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		UserDO user =new UserDO();
 		user.setFromType(0);
-		user.setUserId(124l);
+		user.setUserId("124");
 		user.setUsername("吴亦凡");
 		String token= HelpUtil.getGUID();
 
@@ -152,7 +152,7 @@ public class MemberController extends BaseController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		UserDO user =new UserDO();
 		user.setFromType(0);
-		user.setUserId(Long.valueOf(userId));
+		user.setUserId(userId);
 		user=userService.getUserByUserId(user);
 		map.put("user",user);
 		return R.ok(map);

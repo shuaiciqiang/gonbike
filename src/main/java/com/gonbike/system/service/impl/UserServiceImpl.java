@@ -52,9 +52,9 @@ public class UserServiceImpl implements UserService {
     @Override
 //    @Cacheable(value = "user",key = "#id")
     public UserDO get(Long id) {
-        List<Long> roleIds = userRoleMapper.listRoleId(id);
+        List<Integer> roleIds = userRoleMapper.listRoleId(id);
         UserDO user = userMapper.get(id);
-        user.setDeptName(deptMapper.get(user.getDeptId()).getName());
+        user.setDeptName(deptMapper.get(Long.valueOf(user.getDeptId())).getName());
         user.setRoleIds(roleIds);
         return user;
     }
@@ -102,11 +102,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int save(UserDO user) {
         int count = userMapper.save(user);
-        Long userId = user.getUserId();
-        List<Long> roles = user.getRoleIds();
-        userRoleMapper.removeByUserId(userId);
+        String userId = user.getUserId();
+        List<Integer> roles = user.getRoleIds();
+        userRoleMapper.removeByUserId(Long.valueOf(userId));
         List<UserRoleDO> list = new ArrayList<>();
-        for (Long roleId : roles) {
+        for (Integer roleId : roles) {
             UserRoleDO ur = new UserRoleDO();
             ur.setUserId(userId);
             ur.setRoleId(roleId);
@@ -121,11 +121,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int update(UserDO user) {
         int r = userMapper.update(user);
-        Long userId = user.getUserId();
-        List<Long> roles = user.getRoleIds();
-        userRoleMapper.removeByUserId(userId);
+        String userId = user.getUserId();
+        List<Integer> roles = user.getRoleIds();
+        userRoleMapper.removeByUserId(Long.valueOf(userId));
         List<UserRoleDO> list = new ArrayList<>();
-        for (Long roleId : roles) {
+        for (Integer roleId : roles) {
             UserRoleDO ur = new UserRoleDO();
             ur.setUserId(userId);
             ur.setRoleId(roleId);
@@ -172,7 +172,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int adminResetPwd(UserVO userVO) throws Exception {
-        UserDO userDO = get(userVO.getUserDO().getUserId());
+        UserDO userDO = get(Long.valueOf(userVO.getUserDO().getUserId()));
         if ("admin".equals(userDO.getUsername())) {
             throw new Exception("超级管理员的账号不允许直接重置！");
         }
@@ -268,8 +268,8 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> result = new HashMap<>();
         if (sysFileService.save(sysFile) > 0) {
             UserDO userDO = new UserDO();
-            userDO.setUserId(userId);
-            userDO.setPicId(sysFile.getId());
+            userDO.setUserId(userId+"");
+            userDO.setPicId(sysFile.getId()+"");
             if (userMapper.update(userDO) > 0) {
                 result.put("url", sysFile.getUrl());
             }

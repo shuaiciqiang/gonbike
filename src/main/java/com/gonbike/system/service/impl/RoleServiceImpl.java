@@ -45,11 +45,11 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<RoleDO> list(Long userId) {
-        List<Long> rolesIds = userRoleMapper.listRoleId(userId);
+        List<Integer> rolesIds = userRoleMapper.listRoleId(userId);
         List<RoleDO> roles = roleMapper.list(new HashMap<>(16));
         for (RoleDO roleDO : roles) {
             roleDO.setRoleSign("false");
-            for (Long roleId : rolesIds) {
+            for (Integer roleId : rolesIds) {
                 if (Objects.equals(roleDO.getRoleId(), roleId)) {
                     roleDO.setRoleSign("true");
                     break;

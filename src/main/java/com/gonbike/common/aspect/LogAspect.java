@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 
 import com.gonbike.common.service.LogService;
+import com.gonbike.common.utils.*;
 import com.gonbike.system.domain.UserToken;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -24,10 +25,6 @@ import org.springframework.stereotype.Component;
 import com.gonbike.common.annotation.Log;
 import com.gonbike.common.dao.LogDao;
 import com.gonbike.common.domain.LogDO;
-import com.gonbike.common.utils.HttpContextUtils;
-import com.gonbike.common.utils.IPUtils;
-import com.gonbike.common.utils.JSONUtils;
-import com.gonbike.common.utils.ShiroUtils;
 import com.gonbike.system.domain.UserDO;
 
 @Aspect
@@ -84,10 +81,10 @@ public class LogAspect {
         UserDO currUser = ShiroUtils.getUser();
         if (null == currUser) {
             if (null != sysLog.getParams()) {
-                sysLog.setUserId(-1L);
+                sysLog.setUserId("-1");
                 sysLog.setUsername(sysLog.getParams());
             } else {
-                sysLog.setUserId(-1L);
+                sysLog.setUserId("-1");
                 sysLog.setUsername("获取用户信息为空");
             }
         } else {
@@ -97,7 +94,7 @@ public class LogAspect {
         sysLog.setTime((int) time);
         // 系统当前时间
         Date date = new Date();
-        sysLog.setGmtCreate(date);
+        sysLog.setGmtCreate(HelpUtil.getDateTime());
         // 保存系统日志
         logService.save(sysLog);
     }

@@ -4,6 +4,7 @@ import com.gonbike.common.config.Constant;
 import com.gonbike.common.controller.BaseController;
 import com.gonbike.common.domain.DictDO;
 import com.gonbike.common.service.DictService;
+import com.gonbike.common.utils.HelpUtil;
 import com.gonbike.common.utils.PageUtils;
 import com.gonbike.common.utils.Query;
 import com.gonbike.common.utils.R;
@@ -168,7 +169,7 @@ public class NotifyController extends BaseController {
 		NotifyRecordDO notifyRecordDO = new NotifyRecordDO();
 		notifyRecordDO.setNotifyId(id);
 		notifyRecordDO.setUserId(getUserId());
-		notifyRecordDO.setReadDate(new Date());
+		notifyRecordDO.setReadDate(HelpUtil.getDateTime());
 		notifyRecordDO.setIsRead(Constant.OA_NOTIFY_READ_YES);
 		notifyRecordService.changeRead(notifyRecordDO);
 		model.addAttribute("notify", notify);

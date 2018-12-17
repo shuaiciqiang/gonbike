@@ -9,19 +9,19 @@ import java.io.Serializable;
  */
 public class UserToken implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long id;
-    private Long userId;
+    private String id;
+    private String userId;
     private String token;
 
 
     private String createTime;
     private String expireTime;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,11 +41,11 @@ public class UserToken implements Serializable {
         this.expireTime = expireTime;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

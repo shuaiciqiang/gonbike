@@ -40,11 +40,11 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		UserDO user = (UserDO)principals.getPrimaryPrincipal();
-		Long userId =  user.getUserId();
+		String userId =  user.getUserId();
 
 		//用户权限列表
 		MenuService menuService = ApplicationContextRegister.getBean(MenuService.class);
-		Set<String> perms = menuService.listPerms(userId);
+		Set<String> perms = menuService.listPerms(Long.valueOf(userId));
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.setStringPermissions(perms);
 		return info;
@@ -71,7 +71,7 @@ public class UserRealm extends AuthorizingRealm {
 
 		UserDao userMapper = ApplicationContextRegister.getBean(UserDao.class);
 		// 查询用户信息
-		UserDO user =userMapper.get(userToken.getUserId());
+		UserDO user =userMapper.get(Long.valueOf(userToken.getUserId()));
 
 		// 账号不存在
 		if (user == null) {

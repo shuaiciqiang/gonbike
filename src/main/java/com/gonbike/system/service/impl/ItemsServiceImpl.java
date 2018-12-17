@@ -52,7 +52,7 @@ public class ItemsServiceImpl implements ItemsService {
 					itemsDao.insertItemLabel(vItemLabel);
 				}
 			}
-			itemsDao.updateItemLabelByItemId(items.getId());
+			itemsDao.updateItemLabelByItemId(Long.valueOf(items.getId()));
 		}
 
 		return vT;
@@ -62,7 +62,7 @@ public class ItemsServiceImpl implements ItemsService {
 	public int update(ItemsDO items){
 		//System.out.println(items.getItemLabels());
 		if (items.getId()!=null) {
-			itemsDao.deleteItemLabelByItemId(items.getId());
+			itemsDao.deleteItemLabelByItemId(Long.valueOf(items.getId()));
 		}
 		if (items.getId()!=null&&items.getItemLabels()!=null){
 			String[] labelIds=items.getItemLabels().split(",");
@@ -77,7 +77,7 @@ public class ItemsServiceImpl implements ItemsService {
 					itemsDao.insertItemLabel(vItemLabel);
 				}
 			}
-			itemsDao.updateItemLabelByItemId(items.getId());
+			itemsDao.updateItemLabelByItemId(Long.valueOf(items.getId()));
 		}
 		return itemsDao.update(items);
 	}

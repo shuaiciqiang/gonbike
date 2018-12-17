@@ -24,13 +24,13 @@ public class LabelDO implements Serializable {
 	//首页显示的商品数
 	private Integer indexQuery;
 	//创建人ID
-	private Long createUserId;
+	private String createUserId;
 	//创建人
 	private String createUser;
 	//创建日期
 	private String createDate;
 	//最后修改人ID
-	private Long modifyUserId;
+	private String modifyUserId;
 	//最后修改人
 	private String modifyUser;
 	//最后修改日期
@@ -87,13 +87,13 @@ public class LabelDO implements Serializable {
 	/**
 	 * 设置：创建人ID
 	 */
-	public void setCreateUserId(Long createUserId) {
+	public void setCreateUserId(String createUserId) {
 		this.createUserId = createUserId;
 	}
 	/**
 	 * 获取：创建人ID
 	 */
-	public Long getCreateUserId() {
+	public String getCreateUserId() {
 		return createUserId;
 	}
 	/**
@@ -123,13 +123,13 @@ public class LabelDO implements Serializable {
 	/**
 	 * 设置：最后修改人ID
 	 */
-	public void setModifyUserId(Long modifyUserId) {
+	public void setModifyUserId(String modifyUserId) {
 		this.modifyUserId = modifyUserId;
 	}
 	/**
 	 * 获取：最后修改人ID
 	 */
-	public Long getModifyUserId() {
+	public String getModifyUserId() {
 		return modifyUserId;
 	}
 	/**

@@ -17,7 +17,7 @@ public class ItemsDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//商品id，同时也是商品编号
-	private Long id;
+	private String id;
 	//商品标题
 	private String title;
 	//供应商ID
@@ -35,19 +35,19 @@ public class ItemsDO implements Serializable {
 	//商品图片主图
 	private String image;
 	//所属类目，叶子类目
-	private Long cid;
+	private String cid;
 	//版本号
 	private Integer verId;
 	//商品状态，1-正常，2-下架，3-删除
 	private Integer status;
 	//创建人ID
-	private Long createUserId;
+	private String createUserId;
 	//创建人
 	private String createUser;
 	//创建时间
 	private String createTime;
 	//修改人ID
-	private Long modifyUserId;
+	private String modifyUserId;
 	//修改人
 	private String modifyUser;
 	//更新时间
@@ -115,13 +115,13 @@ public class ItemsDO implements Serializable {
 	/**
 	 * 设置：商品id，同时也是商品编号
 	 */
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	/**
 	 * 获取：商品id，同时也是商品编号
 	 */
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 	/**
@@ -223,13 +223,13 @@ public class ItemsDO implements Serializable {
 	/**
 	 * 设置：所属类目，叶子类目
 	 */
-	public void setCid(Long cid) {
+	public void setCid(String cid) {
 		this.cid = cid;
 	}
 	/**
 	 * 获取：所属类目，叶子类目
 	 */
-	public Long getCid() {
+	public String getCid() {
 		return cid;
 	}
 	/**
@@ -259,13 +259,13 @@ public class ItemsDO implements Serializable {
 	/**
 	 * 设置：创建人ID
 	 */
-	public void setCreateUserId(Long createUserId) {
+	public void setCreateUserId(String createUserId) {
 		this.createUserId = createUserId;
 	}
 	/**
 	 * 获取：创建人ID
 	 */
-	public Long getCreateUserId() {
+	public String getCreateUserId() {
 		return createUserId;
 	}
 	/**
@@ -295,13 +295,13 @@ public class ItemsDO implements Serializable {
 	/**
 	 * 设置：修改人ID
 	 */
-	public void setModifyUserId(Long modifyUserId) {
+	public void setModifyUserId(String modifyUserId) {
 		this.modifyUserId = modifyUserId;
 	}
 	/**
 	 * 获取：修改人ID
 	 */
-	public Long getModifyUserId() {
+	public String getModifyUserId() {
 		return modifyUserId;
 	}
 	/**

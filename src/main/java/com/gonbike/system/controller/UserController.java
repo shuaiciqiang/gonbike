@@ -156,7 +156,7 @@ public class UserController extends BaseController {
 	String resetPwd(@PathVariable("id") Long userId, Model model) {
 
 		UserDO userDO = new UserDO();
-		userDO.setUserId(userId);
+		userDO.setUserId(userId+"");
 		model.addAttribute("user", userDO);
 		return prefix + "/reset_pwd";
 	}
@@ -203,7 +203,7 @@ public class UserController extends BaseController {
 
 	@GetMapping("/personal")
 	String personal(Model model) {
-		UserDO userDO  = userService.get(getUserId());
+		UserDO userDO  = userService.get(Long.valueOf(getUserId()));
 		model.addAttribute("user",userDO);
 		model.addAttribute("hobbyList",dictService.getHobbyList(userDO));
 		model.addAttribute("sexList",dictService.getSexList());
@@ -215,7 +215,7 @@ public class UserController extends BaseController {
 
 		Map<String, Object> result = new HashMap<>();
 		try {
-			result = userService.updatePersonalImg(file, avatar_data, getUserId());
+			result = userService.updatePersonalImg(file, avatar_data, Long.valueOf(getUserId()));
 		} catch (Exception e) {
 			return R.error("更新图像失败！");
 		}

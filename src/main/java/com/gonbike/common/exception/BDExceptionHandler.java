@@ -3,10 +3,7 @@ package com.gonbike.common.exception;
 import com.gonbike.common.config.Constant;
 import com.gonbike.common.domain.LogDO;
 import com.gonbike.common.service.LogService;
-import com.gonbike.common.utils.ExceptionUtils;
-import com.gonbike.common.utils.HttpServletUtils;
-import com.gonbike.common.utils.R;
-import com.gonbike.common.utils.ShiroUtils;
+import com.gonbike.common.utils.*;
 import com.gonbike.system.domain.UserDO;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
@@ -68,7 +65,7 @@ public class BDExceptionHandler {
     @ExceptionHandler({Exception.class})
     public Object handleException(Exception e, HttpServletRequest request) {
         LogDO logDO = new LogDO();
-        logDO.setGmtCreate(new Date());
+        logDO.setGmtCreate(HelpUtil.getDateTime());
         logDO.setOperation(Constant.LOG_ERROR);
         logDO.setMethod(request.getRequestURL().toString());
         logDO.setParams(e.toString());

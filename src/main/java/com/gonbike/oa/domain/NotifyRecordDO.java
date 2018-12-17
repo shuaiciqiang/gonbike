@@ -21,11 +21,11 @@ public class NotifyRecordDO implements Serializable {
     //通知通告ID
     private Long notifyId;
     //接受人
-    private Long userId;
+    private String userId;
     //阅读标记
     private Integer isRead;
     //阅读时间
-    private Date readDate;
+    private String readDate;
 
     /**
      * 设置：编号
@@ -58,14 +58,14 @@ public class NotifyRecordDO implements Serializable {
     /**
      * 设置：接受人
      */
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
     /**
      * 获取：接受人
      */
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -86,14 +86,14 @@ public class NotifyRecordDO implements Serializable {
     /**
      * 设置：阅读时间
      */
-    public void setReadDate(Date readDate) {
+    public void setReadDate(String readDate) {
         this.readDate = readDate;
     }
 
     /**
      * 获取：阅读时间
      */
-    public Date getReadDate() {
+    public String getReadDate() {
         return readDate;
     }
 

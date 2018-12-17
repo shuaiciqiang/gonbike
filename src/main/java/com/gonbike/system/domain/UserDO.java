@@ -9,15 +9,15 @@ import java.util.List;
 public class UserDO implements Serializable {
     private static final long serialVersionUID = 1L;
     //
-    private Long userId;
-    // 用户名
+    private String userId;
+    // 用户名，登录账号
     private String username;
     // 用户真实姓名
     private String name;
     // 密码
     private String password;
     // 部门
-    private Long deptId;
+    private Integer deptId;
     private String deptName;
     // 邮箱
     private String email;
@@ -26,20 +26,20 @@ public class UserDO implements Serializable {
     // 状态 0:禁用，1:正常
     private Integer status;
     // 创建用户id
-    private Long userIdCreate;
+    private String userIdCreate;
     // 创建时间
-    private Date gmtCreate;
+    private String gmtCreate;
     // 修改时间
-    private Date gmtModified;
+    private String gmtModified;
     //角色
-    private List<Long> roleIds;
+    private List<Integer> roleIds;
     //性别
-    private Long sex;
+    private Integer sex;
     //出身日期
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birth;
+    private String birth;
     //图片ID
-    private Long picId;
+    private String picId;
     //现居住地
     private String liveAddress;
     //爱好
@@ -104,11 +104,11 @@ public class UserDO implements Serializable {
 		this.fromType = fromType;
 	}
 
-	public Long getUserId() {
+	public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -136,11 +136,11 @@ public class UserDO implements Serializable {
         this.password = password;
     }
 
-    public Long getDeptId() {
+    public Integer getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Long deptId) {
+    public void setDeptId(Integer deptId) {
         this.deptId = deptId;
     }
 
@@ -176,59 +176,59 @@ public class UserDO implements Serializable {
         this.status = status;
     }
 
-    public Long getUserIdCreate() {
+    public String getUserIdCreate() {
         return userIdCreate;
     }
 
-    public void setUserIdCreate(Long userIdCreate) {
+    public void setUserIdCreate(String userIdCreate) {
         this.userIdCreate = userIdCreate;
     }
 
-    public Date getGmtCreate() {
+    public String getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(String gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public String getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(String gmtModified) {
         this.gmtModified = gmtModified;
     }
 
-    public List<Long> getRoleIds() {
+    public List<Integer> getRoleIds() {
         return roleIds;
     }
 
-    public void setRoleIds(List<Long> roleIds) {
+    public void setRoleIds(List<Integer> roleIds) {
         this.roleIds = roleIds;
     }
 
-    public Long getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Long sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 
-    public Long getPicId() {
+    public String getPicId() {
         return picId;
     }
 
-    public void setPicId(Long picId) {
+    public void setPicId(String picId) {
         this.picId = picId;
     }
 

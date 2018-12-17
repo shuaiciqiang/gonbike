@@ -7,7 +7,7 @@ import java.util.Date;
 public class LogDO {
 	private Long id;
 
-	private Long userId;
+	private String userId;
 
 	private String username;
 
@@ -20,8 +20,8 @@ public class LogDO {
 	private String params;
 
 	private String ip;
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date gmtCreate;
+	//@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	private String gmtCreate;
 
 	public Long getId() {
 		return id;
@@ -31,11 +31,11 @@ public class LogDO {
 		this.id = id;
 	}
 
-	public Long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -87,11 +87,11 @@ public class LogDO {
 		this.ip = ip == null ? null : ip.trim();
 	}
 
-	public Date getGmtCreate() {
+	public String getGmtCreate() {
 		return gmtCreate;
 	}
 
-	public void setGmtCreate(Date gmtCreate) {
+	public void setGmtCreate(String gmtCreate) {
 		this.gmtCreate = gmtCreate;
 	}
 

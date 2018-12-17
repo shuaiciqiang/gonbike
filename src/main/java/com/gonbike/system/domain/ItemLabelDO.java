@@ -6,11 +6,11 @@ package com.gonbike.system.domain;
  */
 public class ItemLabelDO {
     private String id;
-    private Long itemId;
+    private String itemId;
     private Integer labelId;
     private String labelCode;
     private String labelName;
-    private Long createUserId;
+    private String createUserId;
     private String createUser;
     private String createDate;
 
@@ -22,11 +22,11 @@ public class ItemLabelDO {
         this.id = id;
     }
 
-    public Long getItemId() {
+    public String getItemId() {
         return itemId;
     }
 
-    public void setItemId(Long itemId) {
+    public void setItemId(String itemId) {
         this.itemId = itemId;
     }
 
@@ -54,11 +54,11 @@ public class ItemLabelDO {
         this.labelName = labelName;
     }
 
-    public Long getCreateUserId() {
+    public String getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(Long createUserId) {
+    public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId;
     }
 
